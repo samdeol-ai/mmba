@@ -13,49 +13,75 @@
 #hero {
   min-height: 100vh;
   display: flex; align-items: center;
-  padding: 72px 5% 0;
-  position: relative; overflow: hidden;
+  padding: 0; position: relative; overflow: hidden;
 }
-.hero-bg-motif {
-  position: absolute; right: -60px; top: 50%;
-  transform: translateY(-50%);
-  width: 640px; height: 640px;
-  opacity: 0.06; pointer-events: none;
+/* Full-bleed photo background */
+.hero-photo {
+  position: absolute; inset: 0; z-index: 0;
+  background: url('images/hero-community.png') center center / cover no-repeat;
+}
+/* Gradient overlay: dark left → transparent right */
+.hero-photo::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(8,3,1,0.88) 0%,
+    rgba(8,3,1,0.75) 35%,
+    rgba(8,3,1,0.30) 60%,
+    rgba(8,3,1,0.05) 100%
+  );
+}
+/* Subtle brand-warm tint + bottom vignette */
+.hero-photo::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(122,30,30,0.16) 0%,
+    rgba(0,0,0,0.0) 55%,
+    rgba(0,0,0,0.40) 100%
+  );
+}
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 140px 5% 80px; max-width: 640px;
+  animation: fadeUp 0.9s ease both;
 }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--bg2); border: 1px solid var(--border);
-  border-radius: 100px; padding: 6px 16px;
-  font-size: 12px; font-weight: 500; color: var(--muted);
-  letter-spacing: 0.5px; text-transform: uppercase;
-  margin-bottom: 28px;
+  background: rgba(255,255,255,0.11); border: 1px solid rgba(255,255,255,0.22);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-radius: 100px; padding: 7px 18px;
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.88);
+  letter-spacing: 0.8px; text-transform: uppercase; margin-bottom: 28px;
 }
-.hero-badge .dot { width: 6px; height: 6px; background: var(--kesari); border-radius: 50%; }
+.hero-badge .dot { width: 6px; height: 6px; background: var(--kesari); border-radius: 50%; flex-shrink: 0; }
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(44px, 6vw, 80px);
-  font-weight: 600; line-height: 1.04;
-  color: var(--text); margin-bottom: 24px;
+  font-size: clamp(46px, 6vw, 86px);
+  font-weight: 600; line-height: 1.04; color: #fff; margin-bottom: 24px;
+  text-shadow: 0 2px 28px rgba(0,0,0,0.45);
 }
-.hero-title .accent { color: var(--maroon); }
+.hero-title .accent { color: var(--gold); }
 .hero-title .highlight { color: var(--kesari); }
 .hero-sub {
-  font-size: 17px; color: var(--muted);
-  max-width: 520px; margin-bottom: 40px; line-height: 1.75;
+  font-size: 17px; color: rgba(255,255,255,0.80);
+  max-width: 520px; margin-bottom: 40px; line-height: 1.78;
+  text-shadow: 0 1px 10px rgba(0,0,0,0.35);
 }
 .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
 .hero-stats {
-  display: flex; gap: 48px;
+  display: flex; gap: 44px; flex-wrap: wrap;
   margin-top: 64px; padding-top: 40px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid rgba(255,255,255,0.16);
+  animation: fadeUp 0.9s 0.18s ease both;
 }
 .stat-item .number {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 42px; font-weight: 700;
-  color: var(--maroon); line-height: 1;
+  font-size: 44px; font-weight: 700;
+  color: var(--gold); line-height: 1;
 }
 .stat-item .label {
-  font-size: 12px; color: var(--muted);
+  font-size: 12px; color: rgba(255,255,255,0.60);
   margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
 }
 
@@ -225,9 +251,9 @@
 @media (max-width: 768px) {
   .about-grid, .community-grid { grid-template-columns: 1fr; }
   .events-grid { grid-template-columns: 1fr; }
-  .hero-stats { gap: 28px; flex-wrap: wrap; }
+  .hero-stats { gap: 24px; }
+  .hero-content { padding: 120px 5% 64px; }
   .pillars { grid-template-columns: 1fr; }
-  .hero-bg-motif { display: none; }
 }
 </style>
 </head>
@@ -266,18 +292,10 @@
 </nav>
 
 <!-- HERO -->
-<section id="hero" class="motif-bg">
-  <div class="accent-line"></div>
-  <svg class="hero-bg-motif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-    <g fill="none" stroke="#7A1E1E" stroke-width="1">
-      <circle cx="200" cy="200" r="180"/><circle cx="200" cy="200" r="140"/>
-      <circle cx="200" cy="200" r="100"/><circle cx="200" cy="200" r="60"/>
-      <line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/>
-      <line x1="73" y1="73" x2="327" y2="327"/><line x1="327" y1="73" x2="73" y2="327"/>
-      <polygon points="200,40 360,300 40,300"/><polygon points="200,360 360,100 40,100"/>
-    </g>
-  </svg>
-  <div class="hero-content anim-hero">
+<section id="hero">
+  <div class="accent-line" style="z-index:3;position:absolute;top:0;left:0;width:100%"></div>
+  <div class="hero-photo"></div>
+  <div class="hero-content">
     <div class="hero-badge"><span class="dot"></span>Serving Bay Area Since 1980</div>
     <h1 class="hero-title">
       Maharashtra's<br>
@@ -287,9 +305,9 @@
     <p class="hero-sub">A vibrant community of Maharashtrians thriving in the Bay Area — celebrating our culture, connecting generations, and building lasting bonds.</p>
     <div class="hero-ctas">
       <a href="events.html" class="btn-primary">Upcoming Events →</a>
-      <a href="membership.html" class="btn-secondary">Become a Member</a>
+      <a href="membership.html" class="btn-secondary" style="border-color:rgba(255,255,255,0.5);color:white">Become a Member</a>
     </div>
-    <div class="hero-stats anim-hero-delay">
+    <div class="hero-stats">
       <div class="stat-item"><div class="number">44+</div><div class="label">Years Strong</div></div>
       <div class="stat-item"><div class="number">1K+</div><div class="label">Families</div></div>
       <div class="stat-item"><div class="number">10+</div><div class="label">Annual Festivals</div></div>

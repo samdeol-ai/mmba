@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ganeshotsav – MMBA Maharashtra Mandal Bay Area</title>
+<meta name="description" content="MMBA Ganeshotsav — 10-day Ganesh festival celebrated every year by Maharashtra Mandal Bay Area. Explore past editions, photos, and 2025 details.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/global.css">
+<style>
+/* ── EVENT EDITION SECTION ── */
+.edition {
+  border: 1px solid var(--border);
+  border-radius: 20px; overflow: hidden;
+  margin-bottom: 40px; background: var(--white);
+  transition: box-shadow 0.2s;
+}
+.edition:hover { box-shadow: 0 8px 40px rgba(0,0,0,0.08); }
+.edition-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 28px 36px; background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap; gap: 16px;
+}
+.edition-header.upcoming { background: var(--maroon); }
+.edition-year {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 42px; font-weight: 700; color: var(--maroon);
+  line-height: 1;
+}
+.edition-header.upcoming .edition-year { color: var(--gold); }
+.edition-meta { display: flex; flex-direction: column; gap: 4px; }
+.edition-dates { font-size: 14px; font-weight: 500; color: var(--text); }
+.edition-header.upcoming .edition-dates { color: rgba(255,255,255,0.85); }
+.edition-venue { font-size: 13px; color: var(--muted); }
+.edition-header.upcoming .edition-venue { color: rgba(255,255,255,0.6); }
+.edition-badge {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; padding: 6px 16px; border-radius: 100px;
+}
+.badge-upcoming { background: var(--gold); color: var(--maroon); }
+.badge-past { background: white; color: var(--kesari); border: 1.5px solid var(--kesari); }
+
+.edition-body { padding: 36px; }
+.edition-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: start; }
+
+/* ── PHOTO LINKS GRID ── */
+.photo-links { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.photo-link {
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border);
+  text-decoration: none; display: block;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: var(--bg2);
+}
+.photo-link:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+.photo-thumb {
+  height: 110px; display: flex; align-items: center; justify-content: center;
+  font-size: 48px; position: relative;
+}
+.photo-thumb.g1 { background: linear-gradient(135deg,#FFF3E0,#FFCC80); }
+.photo-thumb.g2 { background: linear-gradient(135deg,#FFF8E1,#FFE082); }
+.photo-thumb.g3 { background: linear-gradient(135deg,#FCE4EC,#F48FB1); }
+.photo-thumb.g4 { background: linear-gradient(135deg,#F3E5F5,#CE93D8); }
+.photo-thumb.g5 { background: linear-gradient(135deg,#E3F2FD,#90CAF9); }
+.photo-thumb.g6 { background: linear-gradient(135deg,#E0F2F1,#80CBC4); }
+.photo-link-label { padding: 10px 14px; font-size: 12px; font-weight: 500; color: var(--text); }
+.photo-link-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.photo-link-ext { font-size: 10px; color: var(--blue); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; display: block; }
+
+/* ── FEEDBACK ── */
+.feedback-list { display: flex; flex-direction: column; gap: 16px; }
+.feedback-item {
+  background: var(--bg2); border-radius: 12px; padding: 20px;
+  border-left: 4px solid var(--kesari);
+}
+.feedback-text {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 17px; color: var(--text); line-height: 1.6; margin-bottom: 10px;
+}
+.feedback-text::before { content: '"'; color: var(--kesari); font-size: 28px; line-height: 0; vertical-align: -8px; margin-right: 3px; }
+.feedback-author { font-size: 12px; font-weight: 600; color: var(--muted); }
+.feedback-stars { color: var(--gold); font-size: 13px; margin-bottom: 6px; }
+
+/* ── DESCRIPTION ── */
+.edition-desc { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 20px; }
+
+/* ── VENUE BOX ── */
+.venue-box {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; margin-top: 20px;
+}
+.venue-box h5 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--kesari); margin-bottom: 12px; }
+.venue-row { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+.venue-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.venue-text { font-size: 14px; color: var(--text); line-height: 1.5; }
+.venue-text a { color: var(--blue); text-decoration: none; }
+.venue-text a:hover { text-decoration: underline; }
+
+/* ── HIGHLIGHTS ── */
+.highlights { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.highlights li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--muted); line-height: 1.5; }
+.highlights li::before { content: '✦'; color: var(--kesari); font-size: 10px; flex-shrink: 0; margin-top: 4px; }
+
+/* ── SIDE INFO ── */
+.side-info { display: flex; flex-direction: column; gap: 20px; }
+
+/* ── INTRO STRIP ── */
+.event-intro {
+  background: linear-gradient(135deg, var(--maroon) 0%, #5c1515 100%);
+  padding: 48px 5%; color: white; position: relative; overflow: hidden;
+}
+.event-intro::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='2' fill='%23FFFFFF' fill-opacity='0.04'/%3E%3C/svg%3E");
+}
+.event-intro-inner { position: relative; z-index: 1; max-width: 680px; }
+.event-intro p { font-size: 16px; opacity: 0.75; line-height: 1.8; margin-top: 16px; }
+
+/* ── REGISTER CTA ── */
+.register-cta {
+  background: var(--kesari); border-radius: 16px; padding: 32px 36px;
+  color: white; text-align: center; margin-top: 8px;
+}
+.register-cta h4 { font-family: 'Cormorant Garamond',serif; font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+.register-cta p { font-size: 14px; opacity: 0.85; margin-bottom: 20px; line-height: 1.6; }
+.register-cta a { background: white; color: var(--kesari); font-weight: 600; padding: 12px 28px; border-radius: 8px; text-decoration: none; font-size: 14px; transition: opacity 0.2s; display: inline-block; }
+.register-cta a:hover { opacity: 0.9; }
+
+@media (max-width: 768px) {
+  .edition-grid { grid-template-columns: 1fr; }
+  .photo-links { grid-template-columns: 1fr 1fr; }
+  .edition-body { padding: 24px; }
+  .edition-header { padding: 20px 24px; }
+  .edition-year { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-emblem"><span>म</span></div>
+    <div class="logo-text"><span class="name">MMBA</span><span class="tagline">Maharashtra Mandal Bay Area</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="events.html" class="active">Events</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="membership.html" class="btn-nav-join">Join Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="about.html">About</a><a href="events.html">Events</a><a href="gallery.html">Gallery</a>
+  <a href="community.html">Community</a><a href="membership.html">Membership</a>
+  <a href="contact.html">Contact</a><a href="membership.html" class="btn-nav-join">Join Us</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero motif-bg">
+  <div class="accent-line"></div>
+  <svg class="page-hero-motif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#7A1E1E" stroke-width="0.8"><circle cx="200" cy="200" r="180"/><circle cx="200" cy="200" r="130"/><circle cx="200" cy="200" r="80"/><line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/><line x1="74" y1="74" x2="326" y2="326"/><line x1="326" y1="74" x2="74" y2="326"/></g>
+  </svg>
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><a href="events.html">Events</a><span class="sep">›</span><span>Ganeshotsav</span></div>
+  <div class="page-hero-badge"><span class="dot"></span>Annual Signature Event</div>
+  <h1>🪔 <span class="accent">Ganeshotsav</span></h1>
+  <p class="lead">MMBA's grandest 10-day festival — celebrating Lord Ganesh with daily aarti, cultural programs, children's competitions, dhol-tasha, and the beloved visarjan procession.</p>
+</div>
+
+<!-- INTRO -->
+<div class="event-intro">
+  <div class="event-intro-inner">
+    <span class="section-label" style="color:var(--gold)">About This Festival</span>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:white">Ganapati Bappa Morya!</h2>
+    <p>Ganeshotsav is MMBA's flagship annual event — a joyful 10-day celebration of Lord Ganesh featuring Ganesh Sthapana (installation), daily morning and evening aarti, cultural performances by local artists and children, Marathi plays, bhajans, dhol-tasha processions, traditional prasad (modak, puran poli), and Visarjan on the final day. MMBA organizes Ganesh competitions for kids including aarti recitation, rangoli, and drawing. The festival is open to all Bay Area residents.</p>
+  </div>
+</div>
+
+<!-- EDITIONS -->
+<section style="background:var(--bg2)">
+  <div class="section-head fade-in">
+    <span class="section-label">All Editions</span>
+    <h2 class="section-title">Ganeshotsav Through the Years</h2>
+    <p class="section-sub">Every year, MMBA brings the spirit of Pune's legendary Ganeshotsav to Silicon Valley. Here's our journey.</p>
+  </div>
+
+  <!-- 2025 UPCOMING -->
+  <div class="edition fade-in">
+    <div class="edition-header upcoming">
+      <div>
+        <div class="edition-year">2025</div>
+        <div class="edition-meta">
+          <div class="edition-dates">📅 Aug 27 – Sep 5, 2025 (Tentative)</div>
+          <div class="edition-venue">📍 Venue TBA — Milpitas / San Jose Area</div>
+        </div>
+      </div>
+      <span class="edition-badge badge-upcoming">Upcoming</span>
+    </div>
+    <div class="edition-body">
+      <div class="edition-grid">
+        <div>
+          <p class="edition-desc">MMBA Ganeshotsav 2025 is being planned! Ganesh Chaturthi falls on August 27, 2025. As always, we will celebrate with 10 days of aarti, cultural programs, children's events, dhol-tasha, and visarjan. Register early to participate in competitions and cultural performances.</p>
+          <ul class="highlights">
+            <li>Ganesh Sthapana on Ganesh Chaturthi (Aug 27)</li>
+            <li>Daily morning & evening aarti — all welcome</li>
+            <li>Children's aarti, rangoli & drawing competition</li>
+            <li>Marathi cultural performances & bhajans</li>
+            <li>Dhol-tasha procession & Visarjan (Sep 5)</li>
+            <li>Traditional Maharashtrian prasad & food</li>
+          </ul>
+          <div class="venue-box">
+            <h5>Venue & Registration</h5>
+            <div class="venue-row"><span class="venue-icon">📍</span><span class="venue-text">Venue to be announced — follow <a href="https://instagram.com/mmbayarea" target="_blank">@mmbayarea</a> for updates</span></div>
+            <div class="venue-row"><span class="venue-icon">📧</span><span class="venue-text"><a href="mailto:mmba@mmbayarea.org">mmba@mmbayarea.org</a></span></div>
+            <div class="venue-row"><span class="venue-icon">🎟️</span><span class="venue-text">Registration opens closer to event — free for MMBA members</span></div>
+          </div>
+        </div>
+        <div class="side-info">
+          <div class="register-cta">
+            <h4>Get Notified</h4>
+            <p>Be the first to know when 2025 details are announced — dates, venue, and registration.</p>
+            <a href="contact.html">Notify Me →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2024 -->
+  <div class="edition fade-in">
+    <div class="edition-header">
+      <div>
+        <div class="edition-year">2024</div>
+        <div class="edition-meta">
+          <div class="edition-dates">📅 Sep 7 – Sep 16, 2024</div>
+          <div class="edition-venue">📍 Mt. Pleasant High School, 1750 S White Rd, San Jose, CA 95127</div>
+        </div>
+      </div>
+      <span class="edition-badge badge-past">Past Edition</span>
+    </div>
+    <div class="edition-body">
+      <div class="edition-grid">
+        <div>
+          <p class="edition-desc">MMBA Ganeshotsav 2024 was a spectacular 10-day celebration at Mt. Pleasant High School. The air was filled with Bappa's aura from day one, with an electrifying Ganesh Sthapana followed by nightly cultural programs. 2024 featured a special Dhol-Tasha Pathak procession, children's competitions, and a visiting artist performance that drew hundreds from across the Bay Area.</p>
+          <ul class="highlights">
+            <li>Ganesh Sthapana with traditional puja rituals</li>
+            <li>10 nights of cultural programs — music, dance, drama</li>
+            <li>Dhol-Tasha Pathak procession on select evenings</li>
+            <li>Children's competitions: aarti, rangoli, drawing</li>
+            <li>Maharashtrian food stalls — modak, misal, vada pav</li>
+            <li>Visarjan procession on Anant Chaturdashi (Sep 16)</li>
+          </ul>
+          <div class="venue-box">
+            <h5>Venue Details — 2024</h5>
+            <div class="venue-row"><span class="venue-icon">🏫</span><span class="venue-text"><strong>Mt. Pleasant High School</strong><br>1750 S White Rd, San Jose, CA 95127</span></div>
+            <div class="venue-row"><span class="venue-icon">🕕</span><span class="venue-text">Evening programs: 6:00 PM – 9:30 PM daily</span></div>
+            <div class="venue-row"><span class="venue-icon">🚗</span><span class="venue-text">Free parking available on campus</span></div>
+            <div class="venue-row"><span class="venue-icon">🗺️</span><span class="venue-text"><a href="https://maps.google.com/?q=Mt+Pleasant+High+School+San+Jose+CA" target="_blank">Open in Google Maps →</a></span></div>
+          </div>
+        </div>
+        <div class="side-info">
+          <div class="photo-links">
+            <a href="https://www.instagram.com/mmbayarea/" target="_blank" class="photo-link">
+              <div class="photo-thumb g1">🪔</div>
+              <div class="photo-link-label">Ganesh Sthapana<div class="photo-link-sub">Opening ceremony</div><span class="photo-link-ext">📸 Instagram →</span></div>
+            </a>
+            <a href="https://www.instagram.com/mmbayarea/" target="_blank" class="photo-link">
+              <div class="photo-thumb g2">🥁</div>
+              <div class="photo-link-label">Dhol-Tasha<div class="photo-link-sub">Procession photos</div><span class="photo-link-ext">📸 Instagram →</span></div>
+            </a>
+            <a href="https://www.instagram.com/mmbayarea/" target="_blank" class="photo-link">
+              <div class="photo-thumb g3">👧</div>
+              <div class="photo-link-label">Kids Competition<div class="photo-link-sub">Rangoli & drawing</div><span class="photo-link-ext">📸 Instagram →</span></div>
+            </a>
+            <a href="https://www.instagram.com/mmbayarea/" target="_blank" class="photo-link">
+              <div class="photo-thumb g4">🐘</div>
+              <div class="photo-link-label">Visarjan 2024<div class="photo-link-sub">Sep 16 procession</div><span class="photo-link-ext">📸 Instagram →</span></div>
+            </a>
+          </div>
+          <div class="feedback-list" style="margin-top:16px">
+            <div class="feedback-item">
+              <div class="feedback-stars">★★★★★</div>
+              <div class="feedback-text">Bappa's energy this year was unmatched. The dhol-tasha made the entire school resonate with devotion. A memory my kids will carry forever.</div>
+              <div class="feedback-author">— Priya K., San Jose · Member since 2018</div>
+            </div>
+            <div class="feedback-item">
+              <div class="feedback-stars">★★★★★</div>
+              <div class="feedback-text">10 days flew by. The cultural programs were outstanding and the modak was exactly like home. MMBA never disappoints.</div>
+              <div class="feedback-author">— Rajan M., Milpitas · Member</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2023 -->
+  <div class="edition fade-in">
+    <div class="edition-header">
+      <div>
+        <div class="edition-year">2023</div>
+        <div class="edition-meta">
+          <div class="edition-dates">📅 Sep 19 – Sep 28, 2023</div>
+          <div class="edition-venue">📍 Mt. Pleasant High School, San Jose, CA</div>
+        </div>
+      </div>
+      <span class="edition-badge badge-past">Past Edition</span>
+    </div>
+    <div class="edition-body">
+      <div class="edition-grid">
+        <div>
+          <p class="edition-desc">Ganeshotsav 2023 returned in full force with 10 days of celebrations including nightly cultural performances, Marathi natak, children's competitions, and a beautiful Visarjan on Anant Chaturdashi. The event saw record participation from Bay Area Maharashtrian families.</p>
+          <ul class="highlights">
+            <li>Record turnout — over 800+ attendees on peak nights</li>
+            <li>Special Marathi natak performance on Day 7</li>
+            <li>Kids aarti competition with 50+ participants</li>
+            <li>Visiting bhajan artists from Maharashtra</li>
+            <li>Traditional sadar ceremony on visarjan day</li>
+          </ul>
+          <div class="venue-box">
+            <h5>Venue Details — 2023</h5>
+            <div class="venue-row"><span class="venue-icon">🏫</span><span class="venue-text">Mt. Pleasant High School, 1750 S White Rd, San Jose, CA 95127</span></div>
+            <div class="venue-row"><span class="venue-icon">🕕</span><span class="venue-text">Daily programs 6:00 PM – 9:00 PM</span></div>
+          </div>
+        </div>
+        <div class="side-info">
+          <div class="photo-links">
+            <a href="https://www.instagram.com/mmbayarea/" target="_blank" class="photo-link">
+              <div class="photo-thumb g1">🙏</div>
+              <div class="photo-link-label">Aarti Ceremony<div class="photo-link-sub">Community photos</div><span class="photo-link-ext">📸 Instagram →</span></div>
+            </a>
+            <a href="https://www.instagram.com/mmbayarea/" target="_blank" class="photo-link">
+              <div class="photo-thumb g5">💃</div>
+              <div class="photo-link-label">Cultural Night<div class="photo-link-sub">Dance performances</div><span class="photo-link-ext">📸 Instagram →</span></div>
+            </a>
+          </div>
+          <div class="feedback-list" style="margin-top:16px">
+            <div class="feedback-item">
+              <div class="feedback-stars">★★★★★</div>
+              <div class="feedback-text">Brought my parents visiting from Pune — they said it felt just like home. That says everything about what MMBA creates.</div>
+              <div class="feedback-author">— Sunil D., Fremont</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2022 -->
+  <div class="edition fade-in">
+    <div class="edition-header">
+      <div>
+        <div class="edition-year">2022</div>
+        <div class="edition-meta">
+          <div class="edition-dates">📅 Aug 31 – Sep 9, 2022</div>
+          <div class="edition-venue">📍 In-person return after COVID years</div>
+        </div>
+      </div>
+      <span class="edition-badge badge-past">Past Edition</span>
+    </div>
+    <div class="edition-body">
+      <div class="edition-grid">
+        <div>
+          <p class="edition-desc">The joyful return to in-person Ganeshotsav after the pandemic years. 2022 marked a milestone — the community came together once again under one roof to welcome Bappa. The energy was electric and the emotion palpable as families reunited around shared devotion.</p>
+          <ul class="highlights">
+            <li>First full in-person Ganeshotsav since 2019</li>
+            <li>Emotional Ganesh Sthapana — community gathered in tears of joy</li>
+            <li>Children's programs after a 2-year gap — emotional homecoming</li>
+            <li>Live dhol-tasha for visarjan</li>
+          </ul>
+        </div>
+        <div class="side-info">
+          <div class="feedback-list">
+            <div class="feedback-item">
+              <div class="feedback-stars">★★★★★</div>
+              <div class="feedback-text">After two years of virtual Ganeshotsav, being back in person and hearing the dhol was deeply moving. MMBA made it happen beautifully.</div>
+              <div class="feedback-author">— Anita P., Santa Clara</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2021 -->
+  <div class="edition fade-in">
+    <div class="edition-header">
+      <div>
+        <div class="edition-year">2021</div>
+        <div class="edition-meta">
+          <div class="edition-dates">📅 Sep 10 – Sep 19, 2021</div>
+          <div class="edition-venue">📍 Virtual / Hybrid — Zoom & Facebook Live</div>
+        </div>
+      </div>
+      <span class="edition-badge badge-past">Virtual Edition</span>
+    </div>
+    <div class="edition-body">
+      <div class="edition-grid">
+        <div>
+          <p class="edition-desc">Ganeshotsav 2021 was organized as a hybrid virtual event due to pandemic restrictions. MMBA invited Bay Area families to recite aarti from their homes on video, which was shared on MMBA's Facebook Live and Zoom. Members were also given the opportunity to perform live on Zoom. A remarkable show of community resilience.</p>
+          <ul class="highlights">
+            <li>Home aarti video submissions by families across the Bay Area</li>
+            <li>Live performances streamed on Facebook and Zoom</li>
+            <li>Children's virtual rangoli & drawing competition</li>
+            <li>Online cultural program on Zoom — music, poetry, drama</li>
+            <li>MMBA coordinated and produced the entire event digitally</li>
+          </ul>
+          <div class="venue-box">
+            <h5>Watch Archive</h5>
+            <div class="venue-row"><span class="venue-icon">📺</span><span class="venue-text"><a href="https://www.facebook.com/mmbayarea/" target="_blank">Facebook Live recordings — @mmbayarea on Facebook</a></span></div>
+          </div>
+        </div>
+        <div class="side-info">
+          <div class="feedback-list">
+            <div class="feedback-item">
+              <div class="feedback-stars">★★★★★</div>
+              <div class="feedback-text">Even virtually, MMBA brought us together. Watching other families do aarti from their homes across the Bay felt deeply connected.</div>
+              <div class="feedback-author">— Meera S., Sunnyvale</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2020 -->
+  <div class="edition fade-in">
+    <div class="edition-header">
+      <div>
+        <div class="edition-year">2020</div>
+        <div class="edition-meta">
+          <div class="edition-dates">📅 Aug 22 – Sep 1, 2020</div>
+          <div class="edition-venue">📍 Virtual — Facebook Live & Zoom</div>
+        </div>
+      </div>
+      <span class="edition-badge badge-past">Virtual Edition</span>
+    </div>
+    <div class="edition-body">
+      <p class="edition-desc">Ganeshotsav 2020 was MMBA's first fully virtual edition, created in response to the COVID-19 pandemic. Performances were telecasted live on MMBA's Facebook page and Zoom — not pre-recorded but truly live, maintaining the spirit of the celebration. A golden opportunity for Bay Area members to showcase their talent from home.</p>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo-mark">MM<span>BA</span></div><p>A non-profit serving the Maharashtrian community in Northern California since 1980.</p><div class="est">Est. 1980 · Milpitas, CA · Non-Profit 501(c)(3)</div></div>
+    <div class="footer-col"><h4>Events</h4><ul><li><a href="event-ganeshotsav.html">Ganeshotsav</a></li><li><a href="event-diwali.html">Diwali</a></li><li><a href="event-natak.html">Marathi Natak</a></li><li><a href="event-makar-sankrant.html">Makar Sankrant</a></li><li><a href="event-wari.html">Wari</a></li><li><a href="events.html">All Events</a></li></ul></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="about.html">About MMBA</a></li><li><a href="membership.html">Membership</a></li><li><a href="community.html">Community</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="https://instagram.com/mmbayarea" target="_blank">Instagram @mmbayarea</a></li><li><a href="https://facebook.com/mmbayarea" target="_blank">Facebook</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Maharashtra Mandal Bay Area. All rights reserved.</span><div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="https://mmbayarea.org" target="_blank">mmbayarea.org</a></div></div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
