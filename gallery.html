@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery – MMBA Maharashtra Mandal Bay Area</title>
+<meta name="description" content="Photos and memories from MMBA events — Ganeshotsav, Diwali, Marathi Natak, and more Bay Area Maharashtrian celebrations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/global.css">
+<style>
+/* ── GALLERY FILTERS ── */
+.gallery-filter { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 44px; }
+.gf-btn {
+  padding: 9px 20px; border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: var(--white); color: var(--muted);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s; font-family: inherit;
+}
+.gf-btn:hover { border-color: var(--kesari); color: var(--kesari); }
+.gf-btn.active { background: var(--kesari); border-color: var(--kesari); color: white; }
+
+/* ── MASONRY GRID ── */
+.gallery-masonry {
+  columns: 4; column-gap: 16px;
+}
+.gal-item {
+  break-inside: avoid; margin-bottom: 16px;
+  border-radius: 12px; overflow: hidden;
+  position: relative; cursor: pointer;
+  display: block;
+}
+.gal-thumb {
+  width: 100%; display: flex; align-items: center; justify-content: center;
+  position: relative; transition: transform 0.3s;
+}
+.gal-item:hover .gal-thumb { transform: scale(1.02); }
+.gal-inner {
+  width: 100%; padding-top: 100%; /* square default */
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+.gal-inner.tall { padding-top: 140%; }
+.gal-inner.wide { padding-top: 65%; }
+.gal-emoji {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 56px; border-radius: 12px;
+  transition: opacity 0.2s;
+}
+.gal-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(122,30,30,0.85) 0%, transparent 60%);
+  border-radius: 12px; opacity: 0; transition: opacity 0.3s;
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 16px;
+}
+.gal-item:hover .gal-overlay { opacity: 1; }
+.gal-caption { font-size: 13px; font-weight: 600; color: white; line-height: 1.3; }
+.gal-subcap { font-size: 11px; color: rgba(255,255,255,0.7); margin-top: 3px; }
+
+/* ── COLOR THEMES ── */
+.th-ganesh  { background: linear-gradient(135deg,#FFF3E0,#FFCC80); }
+.th-diwali  { background: linear-gradient(135deg,#FFF8E1,#FFE082); }
+.th-natak   { background: linear-gradient(135deg,#FCE4EC,#F48FB1); }
+.th-wari    { background: linear-gradient(135deg,#E3F2FD,#90CAF9); }
+.th-music   { background: linear-gradient(135deg,#F3E5F5,#CE93D8); }
+.th-social  { background: linear-gradient(135deg,#E0F2F1,#80CBC4); }
+.th-sankrant{ background: linear-gradient(135deg,#E8F5E9,#A5D6A7); }
+.th-gold    { background: linear-gradient(135deg,#FFFDE7,#FFF176); }
+.th-fest    { background: linear-gradient(135deg,#FBE9E7,#FFAB91); }
+
+/* ── LIGHTBOX ── */
+#lightbox {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  display: none; align-items: center; justify-content: center;
+  flex-direction: column; gap: 20px;
+  cursor: pointer;
+}
+#lightbox.open { display: flex; }
+#lightbox .lb-emoji { font-size: 140px; line-height: 1; }
+#lightbox .lb-caption { font-family: 'Cormorant Garamond',serif; font-size: 24px; color: white; font-weight: 500; }
+#lightbox .lb-sub { font-size: 14px; color: rgba(255,255,255,0.5); }
+#lightbox .lb-close { position: fixed; top: 24px; right: 32px; font-size: 32px; color: rgba(255,255,255,0.6); cursor: pointer; }
+
+/* ── INSTAGRAM SECTION ── */
+.insta-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 4px; }
+.insta-tile {
+  aspect-ratio: 1; border-radius: 4px; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.insta-tile:hover { transform: scale(1.04); opacity: 0.9; }
+
+@media (max-width: 1100px) { .gallery-masonry { columns: 3; } }
+@media (max-width: 768px) { .gallery-masonry { columns: 2; } .insta-grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 480px) { .gallery-masonry { columns: 2; } }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-emblem"><span>म</span></div>
+    <div class="logo-text"><span class="name">MMBA</span><span class="tagline">Maharashtra Mandal Bay Area</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li><li><a href="events.html">Events</a></li>
+    <li><a href="gallery.html" class="active">Gallery</a></li><li><a href="community.html">Community</a></li>
+    <li><a href="membership.html">Membership</a></li><li><a href="contact.html">Contact</a></li>
+    <li><a href="membership.html" class="btn-nav-join">Join Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="about.html">About</a><a href="events.html">Events</a><a href="gallery.html">Gallery</a>
+  <a href="community.html">Community</a><a href="membership.html">Membership</a>
+  <a href="contact.html">Contact</a><a href="membership.html" class="btn-nav-join">Join Us</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero motif-bg">
+  <div class="accent-line"></div>
+  <svg class="page-hero-motif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#7A1E1E" stroke-width="0.8"><circle cx="200" cy="200" r="180"/><circle cx="200" cy="200" r="130"/><circle cx="200" cy="200" r="80"/></g>
+  </svg>
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span>Gallery</span></div>
+  <div class="page-hero-badge"><span class="dot"></span>Memories & Moments</div>
+  <h1>Our <span class="accent">Gallery</span></h1>
+  <p class="lead">Glimpses from MMBA's festivals, performances, and community moments — 44 years of celebrations captured in pictures.</p>
+</div>
+
+<!-- GALLERY -->
+<section style="background:var(--white)">
+  <div class="gallery-filter fade-in">
+    <button class="gf-btn active" data-filter="all">All Photos</button>
+    <button class="gf-btn" data-filter="ganesh">🪔 Ganeshotsav</button>
+    <button class="gf-btn" data-filter="diwali">✨ Diwali</button>
+    <button class="gf-btn" data-filter="natak">🎭 Natak</button>
+    <button class="gf-btn" data-filter="music">🎶 Music & Dance</button>
+    <button class="gf-btn" data-filter="wari">🚶 Wari</button>
+    <button class="gf-btn" data-filter="social">🤝 Community</button>
+  </div>
+
+  <div class="gallery-masonry fade-in" id="gallery-grid">
+    <!-- Ganeshotsav -->
+    <div class="gal-item" data-cat="ganesh" data-caption="Ganeshotsav Aarti" data-sub="Annual Celebration"><div class="gal-thumb"><div class="gal-inner tall th-ganesh"><span class="gal-emoji">🪔</span></div><div class="gal-overlay"><div class="gal-caption">Ganeshotsav Aarti</div><div class="gal-subcap">Annual Celebration</div></div></div></div>
+    <div class="gal-item" data-cat="diwali" data-caption="Diwali Lights" data-sub="Festival of Lights"><div class="gal-thumb"><div class="gal-inner th-diwali"><span class="gal-emoji">✨</span></div><div class="gal-overlay"><div class="gal-caption">Diwali Lights</div><div class="gal-subcap">Festival of Lights</div></div></div></div>
+    <div class="gal-item" data-cat="natak" data-caption="Marathi Natak Performance" data-sub="Annual Theater"><div class="gal-thumb"><div class="gal-inner wide th-natak"><span class="gal-emoji">🎭</span></div><div class="gal-overlay"><div class="gal-caption">Marathi Natak</div><div class="gal-subcap">Annual Theater Performance</div></div></div></div>
+    <div class="gal-item" data-cat="music" data-caption="Classical Dance Performance" data-sub="Performing Arts"><div class="gal-thumb"><div class="gal-inner th-music"><span class="gal-emoji">💃</span></div><div class="gal-overlay"><div class="gal-caption">Classical Dance</div><div class="gal-subcap">Performing Arts Program</div></div></div></div>
+    <div class="gal-item" data-cat="ganesh" data-caption="Ganpati Visarjan" data-sub="Ganeshotsav Day 10"><div class="gal-thumb"><div class="gal-inner wide th-fest"><span class="gal-emoji">🐘</span></div><div class="gal-overlay"><div class="gal-caption">Ganpati Visarjan</div><div class="gal-subcap">Ganeshotsav Day 10</div></div></div></div>
+    <div class="gal-item" data-cat="wari" data-caption="Wari Procession" data-sub="Community Walk"><div class="gal-thumb"><div class="gal-inner tall th-wari"><span class="gal-emoji">🚶</span></div><div class="gal-overlay"><div class="gal-caption">Wari Procession</div><div class="gal-subcap">Sacred Community Walk</div></div></div></div>
+    <div class="gal-item" data-cat="social" data-caption="Community Gathering" data-sub="MMBA Family"><div class="gal-thumb"><div class="gal-inner th-social"><span class="gal-emoji">🤝</span></div><div class="gal-overlay"><div class="gal-caption">Community Gathering</div><div class="gal-subcap">MMBA Family Moment</div></div></div></div>
+    <div class="gal-item" data-cat="music" data-caption="Live Music Performance" data-sub="Visiting Artists"><div class="gal-thumb"><div class="gal-inner th-music"><span class="gal-emoji">🎶</span></div><div class="gal-overlay"><div class="gal-caption">Live Music</div><div class="gal-subcap">Visiting Artists from India</div></div></div></div>
+    <div class="gal-item" data-cat="diwali" data-caption="Rangoli Art" data-sub="Diwali Celebration"><div class="gal-thumb"><div class="gal-inner wide th-diwali"><span class="gal-emoji">🎨</span></div><div class="gal-overlay"><div class="gal-caption">Rangoli Art</div><div class="gal-subcap">Diwali Celebration</div></div></div></div>
+    <div class="gal-item" data-cat="ganesh" data-caption="Children's Aarti" data-sub="Ganeshotsav"><div class="gal-thumb"><div class="gal-inner th-ganesh"><span class="gal-emoji">🙏</span></div><div class="gal-overlay"><div class="gal-caption">Children's Aarti</div><div class="gal-subcap">Ganeshotsav Program</div></div></div></div>
+    <div class="gal-item" data-cat="social" data-caption="Makar Sankrant Kites" data-sub="January Festival"><div class="gal-thumb"><div class="gal-inner th-sankrant"><span class="gal-emoji">🪁</span></div><div class="gal-overlay"><div class="gal-caption">Makar Sankrant</div><div class="gal-subcap">Kite Flying Festival</div></div></div></div>
+    <div class="gal-item" data-cat="natak" data-caption="Stage Rehearsal" data-sub="Marathi Natak Prep"><div class="gal-thumb"><div class="gal-inner tall th-natak"><span class="gal-emoji">🎬</span></div><div class="gal-overlay"><div class="gal-caption">Stage Rehearsal</div><div class="gal-subcap">Marathi Natak Preparation</div></div></div></div>
+    <div class="gal-item" data-cat="music" data-caption="Tabla Performance" data-sub="Classical Music"><div class="gal-thumb"><div class="gal-inner th-gold"><span class="gal-emoji">🥁</span></div><div class="gal-overlay"><div class="gal-caption">Tabla Performance</div><div class="gal-subcap">Classical Music Program</div></div></div></div>
+    <div class="gal-item" data-cat="diwali" data-caption="Diwali Sweets" data-sub="Traditional Prasad"><div class="gal-thumb"><div class="gal-inner th-diwali"><span class="gal-emoji">🍬</span></div><div class="gal-overlay"><div class="gal-caption">Festival Sweets</div><div class="gal-subcap">Traditional Prasad</div></div></div></div>
+    <div class="gal-item" data-cat="social" data-caption="Mangalagaur Celebration" data-sub="Women's Festival"><div class="gal-thumb"><div class="gal-inner th-music"><span class="gal-emoji">👩</span></div><div class="gal-overlay"><div class="gal-caption">Mangalagaur</div><div class="gal-subcap">Women's Cultural Festival</div></div></div></div>
+    <div class="gal-item" data-cat="ganesh" data-caption="Modak Offering" data-sub="Ganeshotsav Prasad"><div class="gal-thumb"><div class="gal-inner wide th-ganesh"><span class="gal-emoji">🧁</span></div><div class="gal-overlay"><div class="gal-caption">Modak Offering</div><div class="gal-subcap">Ganeshotsav Prasad</div></div></div></div>
+  </div>
+  <div style="text-align:center;margin-top:48px" class="fade-in">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:16px">📸 Photos are being updated regularly. Follow us on Instagram for real-time moments.</p>
+    <a href="https://instagram.com/mmbayarea" target="_blank" class="btn-primary">Follow @mmbayarea →</a>
+  </div>
+</section>
+
+<!-- INSTAGRAM FEED -->
+<section style="background:var(--bg2)">
+  <div class="section-head fade-in centered">
+    <span class="section-label">Social Media</span>
+    <h2 class="section-title">On Instagram</h2>
+    <p class="section-sub">4,200+ followers watching our cultural journey. Join us <a href="https://instagram.com/mmbayarea" target="_blank" style="color:var(--blue)">@mmbayarea</a></p>
+  </div>
+  <div class="insta-grid fade-in">
+    <div class="insta-tile th-ganesh">🪔</div>
+    <div class="insta-tile th-music">💃</div>
+    <div class="insta-tile th-diwali">✨</div>
+    <div class="insta-tile th-natak">🎭</div>
+    <div class="insta-tile th-wari">🚶</div>
+    <div class="insta-tile th-social">🤝</div>
+    <div class="insta-tile th-sankrant">🪁</div>
+    <div class="insta-tile th-gold">🎶</div>
+    <div class="insta-tile th-ganesh">🐘</div>
+    <div class="insta-tile th-diwali">🎨</div>
+    <div class="insta-tile th-music">🎵</div>
+    <div class="insta-tile th-fest">🙏</div>
+  </div>
+  <div style="text-align:center;margin-top:32px" class="fade-in">
+    <a href="https://instagram.com/mmbayarea" target="_blank" class="btn-secondary">View on Instagram →</a>
+  </div>
+</section>
+
+<!-- SHARE CTA -->
+<div class="gold-banner">
+  <p>📸 Were you at an MMBA event? Share your photos with us!</p>
+  <a href="contact.html">Submit Photos</a>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <div class="lb-close" id="lb-close">×</div>
+  <div class="lb-emoji" id="lb-emoji">🪔</div>
+  <div class="lb-caption" id="lb-caption"></div>
+  <div class="lb-sub" id="lb-sub">Click anywhere to close</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo-mark">MM<span>BA</span></div><p>A non-profit serving the Maharashtrian community in Northern California since 1980.</p><div class="est">Est. 1980 · Milpitas, CA · Non-Profit 501(c)(3)</div></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="about.html">About MMBA</a></li><li><a href="membership.html">Membership</a></li><li><a href="community.html">Our Mission</a></li><li><a href="contact.html">Volunteer</a></li></ul></div>
+    <div class="footer-col"><h4>Events</h4><ul><li><a href="events.html">Ganeshotsav</a></li><li><a href="events.html">Diwali</a></li><li><a href="events.html">All Events</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="https://instagram.com/mmbayarea" target="_blank">Instagram</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Maharashtra Mandal Bay Area. All rights reserved.</span><div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="https://mmbayarea.org" target="_blank">mmbayarea.org</a></div></div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+// Gallery filter
+document.querySelectorAll('.gf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.gf-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.gal-item').forEach(item => {
+      item.style.display = (filter === 'all' || item.dataset.cat === filter) ? '' : 'none';
+    });
+  });
+});
+
+// Lightbox
+const lb = document.getElementById('lightbox');
+document.querySelectorAll('.gal-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.getElementById('lb-emoji').textContent = item.querySelector('.gal-emoji').textContent;
+    document.getElementById('lb-caption').textContent = item.dataset.caption || '';
+    lb.classList.add('open');
+  });
+});
+lb.addEventListener('click', () => lb.classList.remove('open'));
+document.getElementById('lb-close').addEventListener('click', (e) => { e.stopPropagation(); lb.classList.remove('open'); });
+</script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events – MMBA Maharashtra Mandal Bay Area</title>
+<meta name="description" content="Upcoming and annual events by Maharashtra Mandal Bay Area — Ganeshotsav, Diwali, Marathi Natak, Makar Sankrant, Wari, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/global.css">
+<style>
+/* ── FILTERS ── */
+.filter-bar {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-bottom: 44px;
+}
+.filter-btn {
+  padding: 9px 20px; border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: var(--white); color: var(--muted);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all 0.2s;
+  font-family: inherit;
+}
+.filter-btn:hover { border-color: var(--kesari); color: var(--kesari); }
+.filter-btn.active { background: var(--kesari); border-color: var(--kesari); color: white; }
+
+/* ── EVENTS MAIN GRID ── */
+.events-main { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.ev-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.ev-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(0,0,0,0.1); }
+.ev-thumb {
+  height: 200px; display: flex; align-items: center; justify-content: center;
+  font-size: 64px; position: relative; overflow: hidden;
+}
+.ev-thumb.ganesh  { background: linear-gradient(135deg,#FFF3E0,#FFCC80); }
+.ev-thumb.diwali  { background: linear-gradient(135deg,#FFF8E1,#FFE082); }
+.ev-thumb.sankrant{ background: linear-gradient(135deg,#E8F5E9,#A5D6A7); }
+.ev-thumb.wari    { background: linear-gradient(135deg,#E3F2FD,#90CAF9); }
+.ev-thumb.theater { background: linear-gradient(135deg,#FCE4EC,#F48FB1); }
+.ev-thumb.music   { background: linear-gradient(135deg,#F3E5F5,#CE93D8); }
+.ev-thumb.social  { background: linear-gradient(135deg,#E0F2F1,#80CBC4); }
+.ev-thumb.natak   { background: linear-gradient(135deg,#FBE9E7,#FFAB91); }
+
+.ev-tag {
+  position: absolute; top: 16px; left: 16px;
+  background: var(--kesari); color: white;
+  font-size: 10px; font-weight: 600; padding: 4px 12px;
+  border-radius: 100px; letter-spacing: 0.5px; text-transform: uppercase;
+}
+.ev-tag.arts    { background: var(--blue); }
+.ev-tag.social  { background: var(--maroon); }
+
+.ev-body { padding: 24px; }
+.ev-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.ev-date { font-size: 11px; font-weight: 600; color: var(--blue); letter-spacing: 0.5px; text-transform: uppercase; }
+.ev-month-badge {
+  font-size: 10px; font-weight: 600; color: var(--muted);
+  background: var(--bg2); padding: 3px 10px; border-radius: 100px;
+}
+.ev-name { font-family: 'Cormorant Garamond',serif; font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+.ev-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+.ev-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--border); }
+.ev-location { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+.ev-cta { color: var(--blue); font-size: 13px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+.ev-cta:hover { gap: 8px; }
+
+/* ── FEATURED EVENT ── */
+.ev-featured {
+  background: var(--maroon); border-radius: 20px; padding: 48px;
+  color: white; display: grid; grid-template-columns: 1fr auto;
+  gap: 48px; align-items: center; margin-bottom: 48px;
+  position: relative; overflow: hidden;
+}
+.ev-featured::before {
+  content: ''; position: absolute; right: -60px; top: -60px;
+  width: 240px; height: 240px; background: rgba(212,175,55,0.12); border-radius: 50%;
+}
+.ev-featured::after {
+  content: ''; position: absolute; left: -40px; bottom: -40px;
+  width: 160px; height: 160px; background: rgba(255,106,19,0.1); border-radius: 50%;
+}
+.ev-featured-badge { font-size: 10px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+.ev-featured h2 { font-family: 'Cormorant Garamond',serif; font-size: 40px; font-weight: 600; line-height: 1.1; margin-bottom: 16px; }
+.ev-featured p { font-size: 15px; opacity: 0.75; line-height: 1.75; max-width: 480px; margin-bottom: 28px; }
+.ev-featured-info { display: flex; gap: 32px; margin-bottom: 28px; }
+.ev-fi-item .fi-label { font-size: 11px; opacity: 0.55; text-transform: uppercase; letter-spacing: 0.5px; }
+.ev-fi-item .fi-val { font-size: 15px; font-weight: 500; margin-top: 4px; }
+.ev-featured-emoji { font-size: 120px; position: relative; z-index: 1; }
+
+/* ── ANNUAL CALENDAR ── */
+.cal-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.cal-month {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px;
+  transition: border-color 0.2s;
+}
+.cal-month:hover { border-color: var(--kesari); }
+.cal-month-name {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--muted); margin-bottom: 10px;
+}
+.cal-event {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 16px; font-weight: 600; color: var(--maroon);
+  padding: 6px 0; border-bottom: 1px solid var(--border);
+}
+.cal-event:last-child { border-bottom: none; }
+.cal-month.empty { opacity: 0.4; }
+
+@media (max-width: 900px) {
+  .events-main { grid-template-columns: 1fr 1fr; }
+  .cal-grid { grid-template-columns: repeat(3,1fr); }
+}
+@media (max-width: 768px) {
+  .events-main { grid-template-columns: 1fr; }
+  .ev-featured { grid-template-columns: 1fr; }
+  .ev-featured-emoji { display: none; }
+  .cal-grid { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-emblem"><span>म</span></div>
+    <div class="logo-text"><span class="name">MMBA</span><span class="tagline">Maharashtra Mandal Bay Area</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="events.html" class="active">Events</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="membership.html" class="btn-nav-join">Join Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="about.html">About</a><a href="events.html">Events</a><a href="gallery.html">Gallery</a>
+  <a href="community.html">Community</a><a href="membership.html">Membership</a>
+  <a href="contact.html">Contact</a><a href="membership.html" class="btn-nav-join">Join Us</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero motif-bg">
+  <div class="accent-line"></div>
+  <svg class="page-hero-motif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#7A1E1E" stroke-width="0.8"><circle cx="200" cy="200" r="180"/><circle cx="200" cy="200" r="130"/><circle cx="200" cy="200" r="80"/><line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/></g>
+  </svg>
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span>Events</span></div>
+  <div class="page-hero-badge"><span class="dot"></span>Year-Round Celebrations</div>
+  <h1>Festivals &<br><span class="accent">Events</span></h1>
+  <p class="lead">From Ganeshotsav to Diwali, Marathi Natak to Wari — MMBA keeps the calendar full of cultural joy for families across the Bay Area.</p>
+</div>
+
+<!-- FEATURED -->
+<section style="background:var(--white)">
+  <div class="ev-featured fade-in">
+    <div style="position:relative;z-index:1">
+      <div class="ev-featured-badge">🌟 Signature Annual Event</div>
+      <h2>Ganeshotsav 2025</h2>
+      <p>Our grandest celebration — 10 days of Ganpati festivities featuring daily aarti, cultural performances, children's programs, community feasts, and the beloved visarjan procession.</p>
+      <div class="ev-featured-info">
+        <div class="ev-fi-item"><div class="fi-label">When</div><div class="fi-val">August – September 2025</div></div>
+        <div class="ev-fi-item"><div class="fi-label">Duration</div><div class="fi-val">10 Days</div></div>
+        <div class="ev-fi-item"><div class="fi-label">Entry</div><div class="fi-val">Open to All</div></div>
+      </div>
+      <a href="contact.html" class="btn-primary">Register & Get Updates</a>
+    </div>
+    <div class="ev-featured-emoji">🪔</div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">All Events</button>
+    <button class="filter-btn" data-filter="cultural">🎭 Cultural</button>
+    <button class="filter-btn" data-filter="arts">🎶 Arts & Music</button>
+    <button class="filter-btn" data-filter="theater">🎪 Theater</button>
+    <button class="filter-btn" data-filter="social">🤝 Social</button>
+  </div>
+
+  <!-- EVENTS GRID -->
+  <div class="events-main">
+    <div class="ev-card fade-in" data-category="cultural">
+      <div class="ev-thumb ganesh"><span class="ev-tag">Flagship</span>🪔</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">Aug – Sep</span><span class="ev-month-badge">10 Days</span></div>
+        <div class="ev-name">Ganeshotsav</div>
+        <p class="ev-desc">The grandest festival in the MMBA calendar. Ten days of daily aarti, cultural programs for all ages, devotional music, children's activities, and the celebrated visarjan on the final day.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Bay Area Venue TBA</span>
+          <a href="contact.html" class="ev-cta">Learn more →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="cultural">
+      <div class="ev-thumb diwali">✨</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">Oct – Nov</span><span class="ev-month-badge">1 Day</span></div>
+        <div class="ev-name">Diwali Celebration</div>
+        <p class="ev-desc">Light up the Bay Area with MMBA's Diwali festivities — including rangoli competitions, traditional sweets, lamp lighting ceremonies, and live cultural performances.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Community Hall</span>
+          <a href="contact.html" class="ev-cta">Learn more →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="cultural">
+      <div class="ev-thumb sankrant">🪁</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">January</span><span class="ev-month-badge">1 Day</span></div>
+        <div class="ev-name">Makar Sankrant</div>
+        <p class="ev-desc">Celebrate the harvest festival with kite flying, tilgul exchange ("Tilgul ghya, god god bola"), sesame sweets, and traditional halwa. A favourite with families and children.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Outdoor Venue</span>
+          <a href="contact.html" class="ev-cta">Learn more →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="cultural">
+      <div class="ev-thumb wari">🚶</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">Jun – Jul</span><span class="ev-month-badge">Procession</span></div>
+        <div class="ev-name">Wari Procession</div>
+        <p class="ev-desc">A sacred community walk in devotion of Sant Dnyaneshwar and Sant Tukaram, keeping alive the ancient Varkari pilgrimage tradition in Silicon Valley.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Bay Area Route</span>
+          <a href="contact.html" class="ev-cta">Learn more →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="cultural">
+      <div class="ev-thumb music">🎵</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">Year-round</span><span class="ev-month-badge">Women's Event</span></div>
+        <div class="ev-name">Mangalagaur</div>
+        <p class="ev-desc">A traditional Maharashtrian women's festival celebrated during Shravan with devotional songs, games, and the joyful spirit of feminine cultural expression.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Community Space</span>
+          <a href="contact.html" class="ev-cta">Learn more →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="cultural">
+      <div class="ev-thumb music">🌕</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">October</span><span class="ev-month-badge">Evening Event</span></div>
+        <div class="ev-name">Kojagiri Poornima</div>
+        <p class="ev-desc">Celebrate the full moon night of Ashwin with moonlit festivities, traditional Kojagiri songs, spiced milk, and a sense of community warmth under the night sky.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Outdoor Venue</span>
+          <a href="contact.html" class="ev-cta">Learn more →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="theater">
+      <div class="ev-thumb theater"><span class="ev-tag arts">Theater</span>🎭</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">Annual</span><span class="ev-month-badge">Performance</span></div>
+        <div class="ev-name">Marathi Natak</div>
+        <p class="ev-desc">An original Marathi play performed by talented local artists. Keeping Maharashtra's 100-year theatrical tradition alive and vibrant in Silicon Valley.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Local Theater</span>
+          <a href="contact.html" class="ev-cta">Learn more →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="arts">
+      <div class="ev-thumb music"><span class="ev-tag arts">Arts</span>🎶</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">Year-round</span><span class="ev-month-badge">Performance</span></div>
+        <div class="ev-name">Visiting Artists from India</div>
+        <p class="ev-desc">MMBA brings acclaimed musicians, dancers, and performers from Maharashtra to perform for the Bay Area community. Past shows have featured classical and folk artists.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Performance Venue</span>
+          <a href="contact.html" class="ev-cta">Get Notified →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="arts">
+      <div class="ev-thumb natak"><span class="ev-tag arts">Arts</span>🏆</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">Annual</span><span class="ev-month-badge">Competition</span></div>
+        <div class="ev-name">Performing Arts Competition</div>
+        <p class="ev-desc">A showcase and competition for local Maharashtrian talent across music, classical dance, folk forms, and acting. Open to youth and adults alike.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Community Stage</span>
+          <a href="contact.html" class="ev-cta">Learn more →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="social">
+      <div class="ev-thumb social"><span class="ev-tag social">Social</span>🤝</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">Annual</span><span class="ev-month-badge">Community</span></div>
+        <div class="ev-name">Community Service Drive</div>
+        <p class="ev-desc">MMBA partners with organizations running service programs in India. A portion of event revenues supports these charitable initiatives, connecting us to those in need.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Bay Area</span>
+          <a href="contact.html" class="ev-cta">Learn more →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="social">
+      <div class="ev-thumb social"><span class="ev-tag social">Social</span>🌐</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">Annual</span><span class="ev-month-badge">Members Only</span></div>
+        <div class="ev-name">Annual General Meeting</div>
+        <p class="ev-desc">The AGM is where MMBA's member community comes together to review the year, elect leadership, and chart the direction for the organization. All members welcome.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 TBA</span>
+          <a href="membership.html" class="ev-cta">Become a member →</a>
+        </div>
+      </div>
+    </div>
+    <div class="ev-card fade-in" data-category="cultural">
+      <div class="ev-thumb ganesh">🌸</div>
+      <div class="ev-body">
+        <div class="ev-meta"><span class="ev-date">Gudi Padwa</span><span class="ev-month-badge">New Year</span></div>
+        <div class="ev-name">Maharashtrian New Year</div>
+        <p class="ev-desc">Celebrate the Maharashtrian New Year with the raising of Gudi, traditional puja, puran poli, and a joyful gathering marking the beginning of the new lunar year.</p>
+        <div class="ev-footer">
+          <span class="ev-location">📍 Community Hall</span>
+          <a href="contact.html" class="ev-cta">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANNUAL CALENDAR -->
+<section style="background:var(--bg2)">
+  <div class="section-head fade-in centered">
+    <span class="section-label">At a Glance</span>
+    <h2 class="section-title">Annual Festival Calendar</h2>
+    <p class="section-sub">MMBA keeps the calendar full year-round. Here's a typical year of celebrations.</p>
+  </div>
+  <div class="cal-grid fade-in">
+    <div class="cal-month"><div class="cal-month-name">January</div><div class="cal-event">Makar Sankrant</div></div>
+    <div class="cal-month empty"><div class="cal-month-name">February</div><div class="cal-event" style="color:var(--muted);font-size:13px">—</div></div>
+    <div class="cal-month"><div class="cal-month-name">March / April</div><div class="cal-event">Gudi Padwa</div></div>
+    <div class="cal-month empty"><div class="cal-month-name">May</div><div class="cal-event" style="color:var(--muted);font-size:13px">—</div></div>
+    <div class="cal-month"><div class="cal-month-name">June – July</div><div class="cal-event">Wari Procession</div></div>
+    <div class="cal-month"><div class="cal-month-name">July – Aug</div><div class="cal-event">Mangalagaur</div></div>
+    <div class="cal-month"><div class="cal-month-name">Aug – Sep</div><div class="cal-event">Ganeshotsav</div><div class="cal-event">Marathi Natak</div></div>
+    <div class="cal-month"><div class="cal-month-name">October</div><div class="cal-event">Kojagiri</div><div class="cal-event">Diwali</div></div>
+    <div class="cal-month"><div class="cal-month-name">November</div><div class="cal-event">Arts Competition</div></div>
+    <div class="cal-month"><div class="cal-month-name">Year-round</div><div class="cal-event">Visiting Artists</div><div class="cal-event">Social Drives</div></div>
+  </div>
+  <div style="text-align:center;margin-top:40px" class="fade-in">
+    <a href="contact.html" class="btn-primary">Get Event Notifications →</a>
+  </div>
+</section>
+
+<!-- GOLD BANNER -->
+<div class="gold-banner">
+  <p>🎭 Want to perform or volunteer at an MMBA event?</p>
+  <a href="contact.html">Contact Us</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo-mark">MM<span>BA</span></div><p>A non-profit organization serving the Maharashtrian community in Northern California. Promoting culture, connection, and heritage since 1980.</p><div class="est">Est. 1980 · Milpitas, CA · Non-Profit 501(c)(3)</div></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="about.html">About MMBA</a></li><li><a href="membership.html">Membership</a></li><li><a href="community.html">Our Mission</a></li><li><a href="contact.html">Volunteer</a></li></ul></div>
+    <div class="footer-col"><h4>Events</h4><ul><li><a href="events.html">Ganeshotsav</a></li><li><a href="events.html">Diwali</a></li><li><a href="events.html">All Events</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="https://instagram.com/mmbayarea" target="_blank">Instagram</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Maharashtra Mandal Bay Area. All rights reserved.</span><div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="https://mmbayarea.org" target="_blank">mmbayarea.org</a></div></div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

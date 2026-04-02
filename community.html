@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community – MMBA Maharashtra Mandal Bay Area</title>
+<meta name="description" content="Meet the MMBA community — Maharashtrian families thriving in Silicon Valley, united by culture, language, and tradition.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/global.css">
+<style>
+/* ── COMMUNITY INTRO ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+
+/* ── TESTIMONIALS ── */
+.testimonial-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.testi-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.testi-stars { font-size: 16px; margin-bottom: 16px; color: var(--gold); }
+.testi-quote {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 18px; color: var(--text); line-height: 1.65;
+  margin-bottom: 24px;
+}
+.testi-quote::before { content: '"'; color: var(--kesari); font-size: 36px; line-height: 0; vertical-align: -12px; margin-right: 4px; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--bg2); border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond',serif; font-size: 18px;
+  font-weight: 700; color: var(--maroon);
+}
+.testi-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.testi-detail { font-size: 12px; color: var(--muted); }
+
+/* ── PROGRAMS ── */
+.program-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.program-card:hover { transform: translateY(-3px); border-color: var(--kesari); }
+.program-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+.program-title { font-family: 'Cormorant Garamond',serif; font-size: 22px; font-weight: 600; color: var(--maroon); margin-bottom: 10px; }
+.program-desc { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+/* ── LANGUAGE BLOCK ── */
+.language-block {
+  background: var(--maroon); border-radius: 20px; padding: 48px;
+  color: white; text-align: center;
+  position: relative; overflow: hidden;
+}
+.language-block::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='2' fill='%23FFFFFF' fill-opacity='0.04'/%3E%3C/svg%3E");
+}
+.marathi-text {
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 64px; font-weight: 700; color: var(--gold);
+  margin-bottom: 8px; position: relative; z-index: 1;
+}
+.marathi-sub { font-size: 14px; opacity: 0.65; margin-bottom: 28px; position: relative; z-index: 1; }
+.marathi-phrases { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; position: relative; z-index: 1; }
+.phrase-tag {
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 100px; padding: 8px 18px;
+  font-family: 'Cormorant Garamond',serif;
+  font-size: 17px; color: white;
+}
+.phrase-meaning { font-size: 11px; opacity: 0.6; display: block; margin-top: 2px; text-align: center; }
+
+/* ── VOLUNTEER ── */
+.volunteer-roles { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.role-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; text-align: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+.role-card:hover { border-color: var(--kesari); background: var(--white); }
+.role-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+.role-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.role-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+@media (max-width: 900px) {
+  .testimonial-grid { grid-template-columns: 1fr 1fr; }
+  .three-col { grid-template-columns: 1fr 1fr; }
+  .volunteer-roles { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 768px) {
+  .two-col, .testimonial-grid { grid-template-columns: 1fr; }
+  .volunteer-roles { grid-template-columns: 1fr 1fr; }
+  .marathi-text { font-size: 44px; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-emblem"><span>म</span></div>
+    <div class="logo-text"><span class="name">MMBA</span><span class="tagline">Maharashtra Mandal Bay Area</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li><li><a href="events.html">Events</a></li>
+    <li><a href="gallery.html">Gallery</a></li><li><a href="community.html" class="active">Community</a></li>
+    <li><a href="membership.html">Membership</a></li><li><a href="contact.html">Contact</a></li>
+    <li><a href="membership.html" class="btn-nav-join">Join Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="about.html">About</a><a href="events.html">Events</a><a href="gallery.html">Gallery</a>
+  <a href="community.html">Community</a><a href="membership.html">Membership</a>
+  <a href="contact.html">Contact</a><a href="membership.html" class="btn-nav-join">Join Us</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero motif-bg">
+  <div class="accent-line"></div>
+  <svg class="page-hero-motif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#7A1E1E" stroke-width="0.8"><circle cx="200" cy="200" r="180"/><circle cx="200" cy="200" r="130"/><circle cx="200" cy="200" r="80"/><line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/></g>
+  </svg>
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span>Community</span></div>
+  <div class="page-hero-badge"><span class="dot"></span>1,000+ Families Strong</div>
+  <h1>Our <span class="accent">Community</span></h1>
+  <p class="lead">Maharashtrian families, professionals, artists, and dreamers — all finding a second home in Silicon Valley through the warmth of shared culture.</p>
+</div>
+
+<!-- INTRO -->
+<section style="background:var(--white)">
+  <div class="two-col">
+    <div class="fade-in">
+      <span class="section-label">Who We Are</span>
+      <h2 class="section-title">Maharashtrians<br>of Silicon Valley</h2>
+      <p style="font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:20px">The Bay Area is home to one of the largest concentrations of Maharashtrian professionals, families, and students outside of India. MMBA has been their cultural anchor since 1980.</p>
+      <p style="font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:20px">Our community spans generations — from first-generation immigrants who brought Maharashtrian culture with them, to second-generation children discovering their roots, to families who've never left Maharashtra but love what we do.</p>
+      <p style="font-size:16px;color:var(--muted);line-height:1.8">What unites us is a shared love of the Marathi language, Maharashtrian food, music, dance, theater, and the warmth of community.</p>
+    </div>
+    <div class="fade-in">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="background:var(--maroon);border-radius:16px;padding:32px;color:white;text-align:center">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:var(--gold);line-height:1">1K+</div>
+          <div style="font-size:13px;opacity:0.7;margin-top:8px">Member Families</div>
+        </div>
+        <div style="background:var(--bg2);border-radius:16px;padding:32px;text-align:center;border:1px solid var(--border)">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:var(--maroon);line-height:1">44+</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:8px">Years Together</div>
+        </div>
+        <div style="background:var(--bg2);border-radius:16px;padding:32px;text-align:center;border:1px solid var(--border)">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;color:var(--maroon);line-height:1">10+</div>
+          <div style="font-size:13px;color:var(--muted);margin-top:8px">Annual Events</div>
+        </div>
+        <div style="background:var(--kesari);border-radius:16px;padding:32px;color:white;text-align:center">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:700;line-height:1">4.2K</div>
+          <div style="font-size:13px;opacity:0.8;margin-top:8px">Instagram Followers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGE BLOCK -->
+<section style="background:var(--bg2)">
+  <div class="language-block fade-in">
+    <div class="marathi-text">मराठी</div>
+    <div class="marathi-sub">The Marathi language — keeping our roots alive in Silicon Valley</div>
+    <div class="marathi-phrases">
+      <div><span class="phrase-tag">नमस्कार</span><span class="phrase-meaning">Namaskar — Hello</span></div>
+      <div><span class="phrase-tag">आपले स्वागत आहे</span><span class="phrase-meaning">Aaplye Swagat Aahe — Welcome</span></div>
+      <div><span class="phrase-tag">तिळगूळ घ्या, गोड गोड बोला</span><span class="phrase-meaning">Tilgul Ghya — Spread Sweetness</span></div>
+      <div><span class="phrase-tag">गणपती बाप्पा मोरया</span><span class="phrase-meaning">Ganpati Bappa Morya</span></div>
+      <div><span class="phrase-tag">माझ्या मनात</span><span class="phrase-meaning">Majhya Manat — In My Heart</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS FOR COMMUNITY -->
+<section style="background:var(--white)">
+  <div class="section-head fade-in">
+    <span class="section-label">What We Offer</span>
+    <h2 class="section-title">Programs for Every<br>Member of the Family</h2>
+    <p class="section-sub">Whether you're 6 or 60, MMBA has something for you — cultural, social, artistic, and charitable programs across the year.</p>
+  </div>
+  <div class="three-col">
+    <div class="program-card fade-in">
+      <span class="program-icon">👧</span>
+      <div class="program-title">For Children</div>
+      <p class="program-desc">Cultural programs, festival activities, and children's performances designed to help the second generation connect with their Maharashtrian roots in a fun, engaging way.</p>
+    </div>
+    <div class="program-card fade-in">
+      <span class="program-icon">👩</span>
+      <div class="program-title">For Women</div>
+      <p class="program-desc">Mangalagaur celebrations, Kojagiri evenings, and women-led cultural events that honor feminine traditions and create spaces for community bonding.</p>
+    </div>
+    <div class="program-card fade-in">
+      <span class="program-icon">🧑‍💼</span>
+      <div class="program-title">For Professionals</div>
+      <p class="program-desc">Networking opportunities within the Maharashtrian professional community in Silicon Valley — because shared culture is the best foundation for business connections.</p>
+    </div>
+    <div class="program-card fade-in">
+      <span class="program-icon">🎨</span>
+      <div class="program-title">For Artists</div>
+      <p class="program-desc">A stage, an audience, and a community. MMBA actively seeks out and celebrates local talent in music, dance, theater, and the visual arts.</p>
+    </div>
+    <div class="program-card fade-in">
+      <span class="program-icon">🌍</span>
+      <div class="program-title">For Givers</div>
+      <p class="program-desc">MMBA channels community resources into charitable programs in India. Volunteers and donors help fund social service organizations doing meaningful work.</p>
+    </div>
+    <div class="program-card fade-in">
+      <span class="program-icon">👴</span>
+      <div class="program-title">For Seniors</div>
+      <p class="program-desc">MMBA events are intergenerational — seniors find connection, familiarity, and the joy of sharing their cultural wisdom with younger generations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--bg2)">
+  <div class="section-head fade-in centered">
+    <span class="section-label">Voices from the Community</span>
+    <h2 class="section-title">What Members Say</h2>
+  </div>
+  <div class="testimonial-grid">
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">MMBA has been our cultural home since we moved to the Bay Area in 2005. Our kids grew up attending Ganeshotsav every year — it's become part of who they are.</div>
+      <div class="testi-author">
+        <div class="testi-avatar">र</div>
+        <div><div class="testi-name">Rahul & Priya Joshi</div><div class="testi-detail">Members since 2005 · Sunnyvale</div></div>
+      </div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">I performed in my first Marathi Natak at MMBA when I was 19. Twenty years later, I help direct the annual play. This community has been my creative family.</div>
+      <div class="testi-author">
+        <div class="testi-avatar">अ</div>
+        <div><div class="testi-name">Aparna Kulkarni</div><div class="testi-detail">Artist & Volunteer · San Jose</div></div>
+      </div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">As a second-generation Maharashtrian, MMBA events are where I feel most connected to my identity. The Diwali celebrations and Ganeshotsav are highlights of my year.</div>
+      <div class="testi-author">
+        <div class="testi-avatar">स</div>
+        <div><div class="testi-name">Sahil Patil</div><div class="testi-detail">Bay Area Born · Fremont</div></div>
+      </div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">My wife isn't Maharashtrian, but she loves MMBA events as much as I do. The community is incredibly warm and welcoming to everyone who loves the culture.</div>
+      <div class="testi-author">
+        <div class="testi-avatar">न</div>
+        <div><div class="testi-name">Nikhil Deshmukh</div><div class="testi-detail">Family Member · Santa Clara</div></div>
+      </div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">When I moved here from Pune, MMBA was the first community I found. They made Silicon Valley feel like home. I've made lifelong friends through these events.</div>
+      <div class="testi-author">
+        <div class="testi-avatar">प</div>
+        <div><div class="testi-name">Pooja Marathe</div><div class="testi-detail">New Member · Mountain View</div></div>
+      </div>
+    </div>
+    <div class="testi-card fade-in">
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-quote">Volunteering for MMBA's Ganeshotsav team is something I look forward to every year. The dedication of the team, the energy of the community — it's truly special.</div>
+      <div class="testi-author">
+        <div class="testi-avatar">व</div>
+        <div><div class="testi-name">Vaibhav Gaikwad</div><div class="testi-detail">Volunteer Lead · Milpitas</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER -->
+<section style="background:var(--white)">
+  <div class="two-col">
+    <div class="fade-in">
+      <span class="section-label">Get Involved</span>
+      <h2 class="section-title">Volunteer With<br>MMBA</h2>
+      <p style="font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:28px">MMBA is run entirely by volunteers who give their time, talent, and passion. Every event is possible because of community members who step up.</p>
+      <p style="font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:36px">We welcome volunteers of all backgrounds and skills. No experience needed — just enthusiasm and love for the community.</p>
+      <a href="contact.html" class="btn-primary">Start Volunteering →</a>
+    </div>
+    <div class="fade-in">
+      <div class="volunteer-roles">
+        <div class="role-card"><span class="role-icon">🎪</span><div class="role-title">Event Organizer</div><div class="role-desc">Help plan and run festivals</div></div>
+        <div class="role-card"><span class="role-icon">🎨</span><div class="role-title">Décor & Design</div><div class="role-desc">Create beautiful spaces</div></div>
+        <div class="role-card"><span class="role-icon">📸</span><div class="role-title">Photography</div><div class="role-desc">Capture our moments</div></div>
+        <div class="role-card"><span class="role-icon">🍱</span><div class="role-title">Food & Catering</div><div class="role-desc">Organize community meals</div></div>
+        <div class="role-card"><span class="role-icon">🎭</span><div class="role-title">Stage Management</div><div class="role-desc">Run performances</div></div>
+        <div class="role-card"><span class="role-icon">📢</span><div class="role-title">Outreach</div><div class="role-desc">Spread the word</div></div>
+        <div class="role-card"><span class="role-icon">💻</span><div class="role-title">Digital Media</div><div class="role-desc">Social & web content</div></div>
+        <div class="role-card"><span class="role-icon">🧒</span><div class="role-title">Children's Programs</div><div class="role-desc">Work with youth</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOLD BANNER -->
+<div class="gold-banner">
+  <p>🌸 Be part of something bigger — join the MMBA family today</p>
+  <a href="membership.html">Become a Member</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo-mark">MM<span>BA</span></div><p>A non-profit serving the Maharashtrian community in Northern California since 1980.</p><div class="est">Est. 1980 · Milpitas, CA · Non-Profit 501(c)(3)</div></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="about.html">About MMBA</a></li><li><a href="membership.html">Membership</a></li><li><a href="community.html">Our Mission</a></li><li><a href="contact.html">Volunteer</a></li></ul></div>
+    <div class="footer-col"><h4>Events</h4><ul><li><a href="events.html">Ganeshotsav</a></li><li><a href="events.html">Diwali</a></li><li><a href="events.html">All Events</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="https://instagram.com/mmbayarea" target="_blank">Instagram</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Maharashtra Mandal Bay Area. All rights reserved.</span><div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="https://mmbayarea.org" target="_blank">mmbayarea.org</a></div></div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

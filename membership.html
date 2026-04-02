@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Membership – MMBA Maharashtra Mandal Bay Area</title>
+<meta name="description" content="Join MMBA — Sadasya, Kutumb, or Pratishtha membership plans for individuals, families, and patrons of Maharashtrian culture in the Bay Area.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/global.css">
+<style>
+/* ── MEMBERSHIP HERO ── */
+.mem-hero-bg { background: var(--maroon); padding: 140px 5% 80px; position: relative; overflow: hidden; }
+.mem-hero-bg .accent-line { background: linear-gradient(90deg, var(--gold), var(--kesari), var(--gold)); }
+.mem-hero-bg .page-hero-badge { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); }
+.mem-hero-bg h1 { color: white; }
+.mem-hero-bg h1 .accent { color: var(--gold); }
+.mem-hero-bg .lead { color: rgba(255,255,255,0.7); }
+.mem-hero-bg .page-hero-motif { opacity: 0.06; }
+.mem-breadcrumb a { color: rgba(255,255,255,0.5); }
+.mem-breadcrumb span { color: rgba(255,255,255,0.4); }
+.mem-breadcrumb .last { color: rgba(255,255,255,0.7); }
+
+/* ── PLAN CARDS ── */
+.plans-wrap { background: var(--maroon); padding: 0 5% 80px; position: relative; z-index: 1; }
+.plans-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.plan-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 20px; padding: 40px 32px;
+  position: relative; transition: transform 0.2s, background 0.2s;
+}
+.plan-card:hover { transform: translateY(-5px); background: rgba(255,255,255,0.11); }
+.plan-card.featured {
+  background: white; border-color: white;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.plan-card.featured:hover { transform: translateY(-8px); }
+.plan-popular {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--kesari); color: white;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+  padding: 5px 16px; border-radius: 100px; white-space: nowrap;
+}
+.plan-tier { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); margin-bottom: 12px; }
+.plan-card.featured .plan-tier { color: var(--kesari); }
+.plan-name { font-family: 'Cormorant Garamond',serif; font-size: 30px; font-weight: 600; color: white; margin-bottom: 6px; }
+.plan-card.featured .plan-name { color: var(--maroon); }
+.plan-marathi { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+.plan-card.featured .plan-marathi { color: var(--muted); }
+.plan-price { font-size: 48px; font-weight: 700; color: white; line-height: 1; }
+.plan-price span { font-size: 18px; font-weight: 400; opacity: 0.6; }
+.plan-card.featured .plan-price { color: var(--maroon); }
+.plan-billing { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+.plan-card.featured .plan-billing { color: var(--muted); }
+.plan-divider { border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 0 0 28px; }
+.plan-card.featured .plan-divider { border-color: var(--border); }
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+.plan-features li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.5; }
+.plan-features li .check { color: var(--gold); font-weight: 700; flex-shrink: 0; }
+.plan-card.featured .plan-features li { color: var(--text); }
+.plan-card.featured .plan-features li .check { color: var(--kesari); }
+.plan-btn {
+  display: block; width: 100%; padding: 14px;
+  border-radius: 10px; text-align: center;
+  font-size: 15px; font-weight: 600; text-decoration: none;
+  border: 1.5px solid rgba(255,255,255,0.3); color: white;
+  background: transparent; cursor: pointer; transition: all 0.2s;
+  font-family: inherit;
+}
+.plan-btn:hover { background: rgba(255,255,255,0.1); }
+.plan-card.featured .plan-btn { background: var(--kesari); color: white; border-color: var(--kesari); }
+.plan-card.featured .plan-btn:hover { background: #e55c0a; }
+
+/* ── BENEFITS TABLE ── */
+.benefits-table { width: 100%; border-collapse: collapse; }
+.benefits-table th {
+  background: var(--maroon); color: white;
+  font-family: 'Cormorant Garamond',serif; font-size: 18px; font-weight: 600;
+  padding: 16px 20px; text-align: left;
+}
+.benefits-table th:first-child { border-radius: 12px 0 0 0; }
+.benefits-table th:last-child { border-radius: 0 12px 0 0; text-align: center; }
+.benefits-table th:not(:first-child) { text-align: center; }
+.benefits-table td { padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text); vertical-align: middle; }
+.benefits-table td:not(:first-child) { text-align: center; }
+.benefits-table tr:hover td { background: var(--bg2); }
+.benefits-table tr:last-child td { border-bottom: none; }
+.check-y { color: var(--kesari); font-size: 18px; }
+.check-n { color: var(--border); font-size: 18px; }
+.check-p { color: var(--gold); font-size: 15px; font-weight: 600; }
+.benefit-name { font-weight: 500; }
+.benefit-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* ── REGISTRATION FORM ── */
+.reg-wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: start; }
+.reg-form { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 40px; }
+.reg-form h3 { font-family: 'Cormorant Garamond',serif; font-size: 28px; font-weight: 600; color: var(--maroon); margin-bottom: 6px; }
+.reg-form p { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-full { grid-column: span 2; }
+.plan-select { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 8px; }
+.plan-radio { display: none; }
+.plan-label {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 14px 8px; border: 1.5px solid var(--border); border-radius: 10px;
+  cursor: pointer; text-align: center; transition: all 0.2s;
+}
+.plan-label:hover { border-color: var(--kesari); }
+.plan-radio:checked + .plan-label { border-color: var(--kesari); background: #FFF5EF; }
+.plan-label .p-name { font-family: 'Cormorant Garamond',serif; font-size: 16px; font-weight: 600; color: var(--maroon); }
+.plan-label .p-price { font-size: 13px; color: var(--kesari); font-weight: 600; margin-top: 2px; }
+
+.reg-aside { display: flex; flex-direction: column; gap: 20px; }
+.aside-box { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+.aside-box h4 { font-family: 'Cormorant Garamond',serif; font-size: 20px; font-weight: 600; color: var(--maroon); margin-bottom: 12px; }
+.aside-box p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+.aside-box ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.aside-box ul li { font-size: 14px; color: var(--muted); display: flex; align-items: flex-start; gap: 10px; }
+.aside-box ul li::before { content: '→'; color: var(--kesari); font-weight: 700; flex-shrink: 0; }
+
+@media (max-width: 900px) {
+  .plans-grid { grid-template-columns: 1fr; max-width: 480px; margin-inline: auto; }
+  .reg-wrap { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-full { grid-column: span 1; }
+  .plan-select { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar" style="background:rgba(122,30,30,0.96)">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-emblem"><span>म</span></div>
+    <div class="logo-text"><span class="name" style="color:var(--gold)">MMBA</span><span class="tagline" style="color:rgba(255,255,255,0.55)">Maharashtra Mandal Bay Area</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html" style="color:rgba(255,255,255,0.8)">About</a></li>
+    <li><a href="events.html" style="color:rgba(255,255,255,0.8)">Events</a></li>
+    <li><a href="gallery.html" style="color:rgba(255,255,255,0.8)">Gallery</a></li>
+    <li><a href="community.html" style="color:rgba(255,255,255,0.8)">Community</a></li>
+    <li><a href="membership.html" class="active" style="color:var(--gold)">Membership</a></li>
+    <li><a href="contact.html" style="color:rgba(255,255,255,0.8)">Contact</a></li>
+    <li><a href="#register" class="btn-nav-join">Join Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger"><span style="background:white"></span><span style="background:white"></span><span style="background:white"></span></button>
+</nav>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="about.html">About</a><a href="events.html">Events</a><a href="gallery.html">Gallery</a>
+  <a href="community.html">Community</a><a href="membership.html">Membership</a>
+  <a href="contact.html">Contact</a><a href="#register" class="btn-nav-join">Join Us</a>
+</nav>
+
+<!-- HERO -->
+<div class="mem-hero-bg">
+  <div class="accent-line"></div>
+  <svg class="page-hero-motif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#D4AF37" stroke-width="0.8"><circle cx="200" cy="200" r="180"/><circle cx="200" cy="200" r="130"/><circle cx="200" cy="200" r="80"/><line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/></g>
+  </svg>
+  <div class="breadcrumb mem-breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span class="last">Membership</span></div>
+  <div class="page-hero-badge"><span class="dot"></span>Join the Mandal</div>
+  <h1>Become a <span class="accent">Member</span></h1>
+  <p class="lead">Your membership is what makes MMBA possible — sustaining festivals, arts programs, and charitable giving that serve our entire community.</p>
+</div>
+
+<!-- PLANS -->
+<div class="plans-wrap">
+  <div class="plans-grid">
+    <div class="plan-card fade-in">
+      <div class="plan-tier">Individual</div>
+      <div class="plan-name">Sadasya</div>
+      <div class="plan-marathi">सदस्य — Community Member</div>
+      <div class="plan-price">$40 <span>/ year</span></div>
+      <div class="plan-billing">Renews annually</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li><span class="check">✓</span> Event invitations & discounted tickets</li>
+        <li><span class="check">✓</span> MMBA Marathi newsletter</li>
+        <li><span class="check">✓</span> Community directory access</li>
+        <li><span class="check">✓</span> Voting rights at AGM</li>
+        <li><span class="check">✓</span> Member-only communications</li>
+      </ul>
+      <a href="#register" class="plan-btn">Get Started</a>
+    </div>
+    <div class="plan-card featured fade-in">
+      <div class="plan-popular">Most Popular</div>
+      <div class="plan-tier">Family</div>
+      <div class="plan-name">Kutumb</div>
+      <div class="plan-marathi">कुटुंब — Family</div>
+      <div class="plan-price">$75 <span>/ year</span></div>
+      <div class="plan-billing">Full family included · renews annually</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li><span class="check">✓</span> All Sadasya benefits</li>
+        <li><span class="check">✓</span> Spouse & children covered</li>
+        <li><span class="check">✓</span> Priority event seating</li>
+        <li><span class="check">✓</span> Children's cultural programs</li>
+        <li><span class="check">✓</span> Discounted performing arts tickets</li>
+        <li><span class="check">✓</span> Family recognition at events</li>
+      </ul>
+      <a href="#register" class="plan-btn">Join as Family</a>
+    </div>
+    <div class="plan-card fade-in">
+      <div class="plan-tier">Patron</div>
+      <div class="plan-name">Pratishtha</div>
+      <div class="plan-marathi">प्रतिष्ठा — Honor & Esteem</div>
+      <div class="plan-price">$200 <span>/ year</span></div>
+      <div class="plan-billing">Premium membership · renews annually</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li><span class="check">✓</span> All Kutumb benefits</li>
+        <li><span class="check">✓</span> Named recognition at annual events</li>
+        <li><span class="check">✓</span> Priority volunteer opportunities</li>
+        <li><span class="check">✓</span> Exclusive patron-only gatherings</li>
+        <li><span class="check">✓</span> Complimentary event tickets (2/year)</li>
+        <li><span class="check">✓</span> Direct line to executive committee</li>
+      </ul>
+      <a href="#register" class="plan-btn">Become a Patron</a>
+    </div>
+  </div>
+</div>
+
+<!-- BENEFITS TABLE -->
+<section style="background:var(--white)">
+  <div class="section-head fade-in">
+    <span class="section-label">Full Comparison</span>
+    <h2 class="section-title">What's Included</h2>
+    <p class="section-sub">Compare all membership tiers and choose what's right for your family.</p>
+  </div>
+  <div style="overflow-x:auto" class="fade-in">
+    <table class="benefits-table">
+      <thead>
+        <tr>
+          <th>Benefit</th>
+          <th>Sadasya ($40)</th>
+          <th>Kutumb ($75)</th>
+          <th>Pratishtha ($200)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><div class="benefit-name">Event Invitations</div><div class="benefit-desc">All MMBA festivals and events</div></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">Discounted Tickets</div><div class="benefit-desc">Member pricing on paid events</div></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">Marathi Newsletter</div><div class="benefit-desc">Regular cultural updates</div></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">Community Directory</div><div class="benefit-desc">Connect with other members</div></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">AGM Voting Rights</div><div class="benefit-desc">Vote on MMBA decisions</div></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">Family Coverage</div><div class="benefit-desc">Spouse & children included</div></td><td><span class="check-n">—</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">Priority Seating</div><div class="benefit-desc">First-choice seats at events</div></td><td><span class="check-n">—</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">Children's Programs</div><div class="benefit-desc">Kids cultural activities</div></td><td><span class="check-n">—</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">Performing Arts Discounts</div><div class="benefit-desc">Reduced ticket prices</div></td><td><span class="check-n">—</span></td><td><span class="check-y">✓</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">Named Recognition</div><div class="benefit-desc">Acknowledged at events</div></td><td><span class="check-n">—</span></td><td><span class="check-n">—</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">Complimentary Tickets</div><div class="benefit-desc">2 free tickets per year</div></td><td><span class="check-n">—</span></td><td><span class="check-n">—</span></td><td><span class="check-y">✓</span></td></tr>
+        <tr><td><div class="benefit-name">Exclusive Patron Events</div><div class="benefit-desc">Private gatherings</div></td><td><span class="check-n">—</span></td><td><span class="check-n">—</span></td><td><span class="check-y">✓</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- REGISTRATION FORM -->
+<section id="register" style="background:var(--bg2)">
+  <div class="section-head fade-in">
+    <span class="section-label">Sign Up</span>
+    <h2 class="section-title">Join MMBA Today</h2>
+    <p class="section-sub">Fill in the form and our team will be in touch to complete your membership. We'll never share your information.</p>
+  </div>
+  <div class="reg-wrap">
+    <div class="reg-form fade-in">
+      <h3>Membership Registration</h3>
+      <p>Complete the form below and our team will contact you within 2 business days.</p>
+      <form id="contact-form">
+        <!-- Plan Selection -->
+        <div style="margin-bottom:20px">
+          <label style="font-size:13px;font-weight:500;color:var(--text);display:block;margin-bottom:10px">Select Your Plan</label>
+          <div class="plan-select">
+            <div><input type="radio" name="plan" id="plan-s" class="plan-radio" value="sadasya"><label for="plan-s" class="plan-label"><span class="p-name">Sadasya</span><span class="p-price">$40/yr</span></label></div>
+            <div><input type="radio" name="plan" id="plan-k" class="plan-radio" value="kutumb" checked><label for="plan-k" class="plan-label"><span class="p-name">Kutumb</span><span class="p-price">$75/yr</span></label></div>
+            <div><input type="radio" name="plan" id="plan-p" class="plan-radio" value="pratishtha"><label for="plan-p" class="plan-label"><span class="p-name">Pratishtha</span><span class="p-price">$200/yr</span></label></div>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group"><label>First Name *</label><input type="text" placeholder="Rahul" required></div>
+          <div class="form-group"><label>Last Name *</label><input type="text" placeholder="Joshi" required></div>
+          <div class="form-group form-full"><label>Email Address *</label><input type="email" placeholder="rahul@email.com" required></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+1 (408) 000-0000"></div>
+          <div class="form-group"><label>City</label><input type="text" placeholder="Sunnyvale"></div>
+          <div class="form-group form-full"><label>Family Members (for Kutumb/Pratishtha)</label><input type="text" placeholder="Spouse name, children names..."></div>
+          <div class="form-group form-full"><label>How did you hear about MMBA?</label>
+            <select><option value="">Select...</option><option>Friend or family</option><option>Instagram / Social media</option><option>Google search</option><option>Community event</option><option>Other</option></select>
+          </div>
+          <div class="form-group form-full"><label>Message (optional)</label><textarea placeholder="Any questions or special notes for our team..."></textarea></div>
+        </div>
+        <div style="margin-top:20px">
+          <button type="submit" class="btn-primary" style="width:100%;text-align:center;display:block;padding:15px;font-size:16px">Submit Registration →</button>
+          <p style="font-size:12px;color:var(--muted);margin-top:12px;text-align:center">Our team will contact you with payment details and next steps.</p>
+        </div>
+      </form>
+    </div>
+    <div class="reg-aside fade-in">
+      <div class="aside-box" style="background:var(--maroon);border-color:var(--maroon)">
+        <h4 style="color:var(--gold)">What Happens Next?</h4>
+        <ul style="list-style:none;gap:12px;display:flex;flex-direction:column">
+          <li style="color:rgba(255,255,255,0.75);display:flex;gap:10px;font-size:14px"><span style="color:var(--gold);font-weight:700;flex-shrink:0">1.</span> You submit this form</li>
+          <li style="color:rgba(255,255,255,0.75);display:flex;gap:10px;font-size:14px"><span style="color:var(--gold);font-weight:700;flex-shrink:0">2.</span> Our team contacts you within 2 business days</li>
+          <li style="color:rgba(255,255,255,0.75);display:flex;gap:10px;font-size:14px"><span style="color:var(--gold);font-weight:700;flex-shrink:0">3.</span> You receive payment instructions</li>
+          <li style="color:rgba(255,255,255,0.75);display:flex;gap:10px;font-size:14px"><span style="color:var(--gold);font-weight:700;flex-shrink:0">4.</span> Membership confirmed — welcome aboard!</li>
+        </ul>
+      </div>
+      <div class="aside-box">
+        <h4>Questions?</h4>
+        <p>Our membership team is happy to help you find the right plan. Reach out any time.</p>
+        <div style="margin-top:16px"><a href="contact.html" class="btn-secondary" style="display:block;text-align:center">Contact Us</a></div>
+      </div>
+      <div class="aside-box">
+        <h4>Tax Deductibility</h4>
+        <p>MMBA is a registered 501(c)(3) non-profit. A portion of your membership dues may be tax-deductible. Consult your tax advisor for details.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo-mark">MM<span>BA</span></div><p>A non-profit serving the Maharashtrian community in Northern California since 1980.</p><div class="est">Est. 1980 · Milpitas, CA · Non-Profit 501(c)(3)</div></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="about.html">About MMBA</a></li><li><a href="membership.html">Membership</a></li><li><a href="community.html">Our Mission</a></li><li><a href="contact.html">Volunteer</a></li></ul></div>
+    <div class="footer-col"><h4>Events</h4><ul><li><a href="events.html">Ganeshotsav</a></li><li><a href="events.html">Diwali</a></li><li><a href="events.html">All Events</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="https://instagram.com/mmbayarea" target="_blank">Instagram</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Maharashtra Mandal Bay Area. All rights reserved.</span><div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="https://mmbayarea.org" target="_blank">mmbayarea.org</a></div></div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About – MMBA Maharashtra Mandal Bay Area</title>
+<meta name="description" content="Learn about Maharashtra Mandal Bay Area (MMBA) — our history, mission, leadership, and values since 1980.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/global.css">
+<style>
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: linear-gradient(to bottom, var(--maroon), var(--kesari), var(--gold));
+}
+.timeline-item { position: relative; margin-bottom: 40px; }
+.timeline-item::before {
+  content: ''; position: absolute; left: -40px; top: 6px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--kesari); border: 3px solid var(--white);
+  box-shadow: 0 0 0 2px var(--kesari);
+}
+.timeline-year {
+  font-size: 11px; font-weight: 700; color: var(--kesari);
+  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px;
+}
+.timeline-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 600; color: var(--maroon); margin-bottom: 6px;
+}
+.timeline-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* ── LEADERSHIP ── */
+.leaders-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+.leader-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px 20px; text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.leader-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.leader-avatar {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: var(--bg2); border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin: 0 auto 16px; font-family: 'Cormorant Garamond', serif;
+  color: var(--maroon); font-weight: 700; font-size: 22px;
+}
+.leader-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+.leader-role { font-size: 12px; color: var(--kesari); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ── PILLARS FULL ── */
+.pillars-full { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.pillar-full {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 16px; padding: 36px; transition: transform 0.2s, box-shadow 0.2s;
+}
+.pillar-full:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+.pillar-full-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+.pillar-full-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; font-weight: 600; color: var(--maroon); margin-bottom: 10px;
+}
+.pillar-full-desc { font-size: 14px; color: var(--muted); line-height: 1.75; }
+
+/* ── VALUES STRIP ── */
+.values-strip { background: var(--maroon); padding: 64px 5%; position: relative; overflow: hidden; }
+.values-strip::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='2' fill='%23FFFFFF' fill-opacity='0.04'/%3E%3C/svg%3E");
+}
+.values-strip .section-label { color: var(--gold); }
+.values-strip .section-title { color: white; }
+.values-list-h { display: grid; grid-template-columns: repeat(4,1fr); gap: 28px; position: relative; z-index: 1; }
+.value-item { text-align: center; }
+.value-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px; font-weight: 700;
+  color: var(--gold); line-height: 1; margin-bottom: 8px;
+}
+.value-label { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+
+/* ── FAQ ── */
+.faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 720px; }
+.faq-item {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+.faq-q {
+  width: 100%; text-align: left; padding: 20px 24px;
+  background: none; border: none; cursor: pointer; font-family: inherit;
+  font-size: 15px; font-weight: 500; color: var(--text);
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.faq-q:hover { color: var(--maroon); }
+.faq-chevron { font-size: 18px; transition: transform 0.3s; color: var(--muted); }
+.faq-item.open .faq-chevron { transform: rotate(180deg); }
+.faq-a {
+  display: none; padding: 0 24px 20px;
+  font-size: 14px; color: var(--muted); line-height: 1.75;
+}
+.faq-item.open .faq-a { display: block; }
+
+@media (max-width: 900px) {
+  .leaders-grid { grid-template-columns: repeat(2,1fr); }
+  .values-list-h { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 768px) {
+  .pillars-full { grid-template-columns: 1fr; }
+  .leaders-grid { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-emblem"><span>म</span></div>
+    <div class="logo-text">
+      <span class="name">MMBA</span>
+      <span class="tagline">Maharashtra Mandal Bay Area</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="membership.html" class="btn-nav-join">Join Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="about.html">About</a><a href="events.html">Events</a><a href="gallery.html">Gallery</a>
+  <a href="community.html">Community</a><a href="membership.html">Membership</a>
+  <a href="contact.html">Contact</a><a href="membership.html" class="btn-nav-join">Join Us</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero motif-bg">
+  <div class="accent-line"></div>
+  <svg class="page-hero-motif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#7A1E1E" stroke-width="0.8">
+      <circle cx="200" cy="200" r="180"/><circle cx="200" cy="200" r="130"/><circle cx="200" cy="200" r="80"/>
+      <line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/>
+      <line x1="74" y1="74" x2="326" y2="326"/><line x1="326" y1="74" x2="74" y2="326"/>
+    </g>
+  </svg>
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span>About</span></div>
+  <div class="page-hero-badge"><span class="dot"></span>Since 1980</div>
+  <h1>Our <span class="accent">Story</span> &<br>Our <span class="highlight">Mission</span></h1>
+  <p class="lead">For over four decades, MMBA has been the heartbeat of Maharashtrian culture in Northern California — a home away from home for thousands of families.</p>
+</div>
+
+<!-- MISSION -->
+<section style="background:var(--white)">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+    <div class="fade-in">
+      <span class="section-label">Who We Are</span>
+      <h2 class="section-title">Maharashtra Mandal<br>Bay Area</h2>
+      <p style="font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:24px">Maharashtra Mandal Bay Area (MMBA) is a registered non-profit organization that has served the Maharashtrian community in Northern California since 1980. We are a community of immigrants, dreamers, engineers, artists, and families who share a deep love for Maharashtrian culture.</p>
+      <p style="font-size:16px;color:var(--muted);line-height:1.8;margin-bottom:24px">Our mission is to <strong style="color:var(--maroon)">promote cultural ties</strong> among people interested in Maharashtrian culture from various parts of the world — and to pass that rich heritage to the next generation growing up in Silicon Valley.</p>
+      <p style="font-size:16px;color:var(--muted);line-height:1.8">We believe culture is not just about the past — it's a living, breathing source of identity, pride, and community.</p>
+    </div>
+    <div class="fade-in">
+      <div style="background:var(--maroon);border-radius:20px;padding:40px;color:white;position:relative;overflow:hidden">
+        <div style="position:absolute;top:-30px;right:-30px;width:160px;height:160px;background:rgba(212,175,55,0.15);border-radius:50%"></div>
+        <div style="position:absolute;bottom:-20px;left:-20px;width:100px;height:100px;background:rgba(255,106,19,0.12);border-radius:50%"></div>
+        <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;opacity:0.6;margin-bottom:28px">Our Core Mission</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.6;margin-bottom:28px;position:relative;z-index:1">"To promote cultural ties among people interested in Maharashtrian culture and to encourage the next generation to learn, celebrate, and carry forward their heritage."</div>
+        <div style="display:flex;gap:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15)">
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold)">501(c)(3)</div><div style="font-size:12px;opacity:0.6;margin-top:4px">Non-Profit Status</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold)">1980</div><div style="font-size:12px;opacity:0.6;margin-top:4px">Year Founded</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:700;color:var(--gold)">N. CA</div><div style="font-size:12px;opacity:0.6;margin-top:4px">Region Served</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES STRIP -->
+<div class="values-strip">
+  <div class="section-head fade-in">
+    <span class="section-label">By the Numbers</span>
+    <h2 class="section-title">Our Community, Our Impact</h2>
+  </div>
+  <div class="values-list-h fade-in">
+    <div class="value-item"><div class="value-num">44+</div><div class="value-label">Years of cultural service to the Bay Area</div></div>
+    <div class="value-item"><div class="value-num">1K+</div><div class="value-label">Member families across Northern California</div></div>
+    <div class="value-item"><div class="value-num">10+</div><div class="value-label">Annual festivals, events, and programs</div></div>
+    <div class="value-item"><div class="value-num">4.2K</div><div class="value-label">Instagram followers & growing community</div></div>
+  </div>
+</div>
+
+<!-- PILLARS -->
+<section style="background:var(--bg2)">
+  <div class="section-head fade-in">
+    <span class="section-label">What We Do</span>
+    <h2 class="section-title">Our Four Pillars</h2>
+    <p class="section-sub">Every MMBA activity falls under one of four pillars that together make up the full tapestry of Maharashtrian cultural life.</p>
+  </div>
+  <div class="pillars-full">
+    <div class="pillar-full fade-in">
+      <span class="pillar-full-icon">🎭</span>
+      <div class="pillar-full-title">Cultural Events</div>
+      <p class="pillar-full-desc">We organize the full spectrum of Maharashtrian festivals: Makar Sankrant, Ganeshotsav, Wari, Mangalagaur, Kojagiri, and Diwali. These festivals give our community a chance to renew cultural ties and encourage children to learn about Maharashtrian culture in a fun, immersive way.</p>
+    </div>
+    <div class="pillar-full fade-in">
+      <span class="pillar-full-icon">🎶</span>
+      <div class="pillar-full-title">Arts & Music</div>
+      <p class="pillar-full-desc">We provide a platform for local talents in music, dance, and acting through performances, competitions, and presentations in the performing arts. We also arrange programs of visiting artists from India, giving Bay Area Maharashtrians access to world-class cultural entertainment.</p>
+    </div>
+    <div class="pillar-full fade-in">
+      <span class="pillar-full-icon">🎪</span>
+      <div class="pillar-full-title">Theater</div>
+      <p class="pillar-full-desc">Maharashtra's modern theater tradition dates back over 100 years. Keeping this tradition alive, MMBA presents an annual Marathi play performed by talented local artists. Occasionally, visiting theatrical groups from India also perform at our venue, bringing fresh stories and energy.</p>
+    </div>
+    <div class="pillar-full fade-in">
+      <span class="pillar-full-icon">🤝</span>
+      <div class="pillar-full-title">Social Impact</div>
+      <p class="pillar-full-desc">We work hand in hand with organizations dedicated to running community service programs in India. Revenue generated from select programs is donated for this cause — connecting our prosperous Bay Area community with the need back home and giving back meaningfully.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY TIMELINE -->
+<section style="background:var(--white)">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+    <div class="fade-in">
+      <span class="section-label">Our History</span>
+      <h2 class="section-title">Four Decades of<br>Cultural Pride</h2>
+      <p class="section-sub" style="margin-bottom:40px">From a small gathering of Maharashtrian families to a thriving 1,000+ member organization, MMBA has grown with Silicon Valley.</p>
+      <div class="timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-year">1980</div>
+          <div class="timeline-title">MMBA Founded</div>
+          <p class="timeline-desc">A group of Maharashtrian families in the Bay Area come together to form Maharashtra Mandal Bay Area, establishing a cultural home for the growing community.</p>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-year">1985</div>
+          <div class="timeline-title">First Annual Ganeshotsav</div>
+          <p class="timeline-desc">MMBA organizes its first large-scale Ganeshotsav celebration, which becomes the organization's flagship event drawing hundreds of families.</p>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-year">1992</div>
+          <div class="timeline-title">501(c)(3) Non-Profit Status</div>
+          <p class="timeline-desc">MMBA receives official non-profit status, formalizing its mission and enabling broader community programs and charitable giving.</p>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-year">2000</div>
+          <div class="timeline-title">Theater Program Launched</div>
+          <p class="timeline-desc">The annual Marathi Natak program is established, offering a stage for local theatrical talent and bringing professional Marathi theater to Silicon Valley.</p>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-year">2010</div>
+          <div class="timeline-title">Digital Expansion</div>
+          <p class="timeline-desc">MMBA launches its online presence, making it easier for Maharashtrians across the Bay Area to connect, register, and stay updated on events.</p>
+        </div>
+        <div class="timeline-item fade-in">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-title">BMM2024 — Silicon Valley</div>
+          <p class="timeline-desc">The global Bharatiya Marathi Mandal convention comes to San Jose, bringing the worldwide Maharashtrian community together in Silicon Valley.</p>
+        </div>
+      </div>
+    </div>
+    <div class="fade-in" style="position:sticky;top:100px">
+      <div style="background:var(--bg2);border-radius:20px;padding:40px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:80px;font-weight:700;color:var(--maroon);opacity:0.15;line-height:1;text-align:center">म</div>
+        <div style="margin-top:-20px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--maroon);margin-bottom:16px">Our Address</div>
+          <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:24px">1765 Landess Ave #108<br>Milpitas, California 95035<br>United States</p>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--maroon);margin-bottom:12px">Contact</div>
+          <p style="font-size:15px;color:var(--muted);margin-bottom:6px"><a href="https://mmbayarea.org" style="color:var(--blue);text-decoration:none">mmbayarea.org</a></p>
+          <p style="font-size:15px;color:var(--muted);margin-bottom:24px"><a href="https://instagram.com/mmbayarea" style="color:var(--blue);text-decoration:none">@mmbayarea</a> on Instagram</p>
+          <a href="contact.html" class="btn-primary" style="display:block;text-align:center">Get in Touch →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section style="background:var(--bg2)">
+  <div class="section-head fade-in centered">
+    <span class="section-label">Leadership</span>
+    <h2 class="section-title">Our Executive Committee</h2>
+    <p class="section-sub">Dedicated volunteers who give their time and passion to keep MMBA thriving.</p>
+  </div>
+  <div class="leaders-grid">
+    <div class="leader-card fade-in">
+      <div class="leader-avatar">अ</div>
+      <div class="leader-name">President</div>
+      <div class="leader-role">Executive Committee</div>
+    </div>
+    <div class="leader-card fade-in">
+      <div class="leader-avatar">व</div>
+      <div class="leader-name">Vice President</div>
+      <div class="leader-role">Executive Committee</div>
+    </div>
+    <div class="leader-card fade-in">
+      <div class="leader-avatar">स</div>
+      <div class="leader-name">Secretary</div>
+      <div class="leader-role">Executive Committee</div>
+    </div>
+    <div class="leader-card fade-in">
+      <div class="leader-avatar">ख</div>
+      <div class="leader-name">Treasurer</div>
+      <div class="leader-role">Executive Committee</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:36px;font-size:14px;color:var(--muted)">
+    <em>Leadership roster updated annually. Contact us for current committee information.</em>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:var(--white)">
+  <div class="section-head fade-in">
+    <span class="section-label">Common Questions</span>
+    <h2 class="section-title">About MMBA</h2>
+  </div>
+  <div class="faq-list fade-in">
+    <div class="faq-item">
+      <button class="faq-q">Do I need to be from Maharashtra to join MMBA? <span class="faq-chevron">⌄</span></button>
+      <div class="faq-a">Not at all! MMBA welcomes anyone with an interest in Maharashtrian culture — whether you're a Marathi speaker, married into a Maharashtrian family, or simply love the culture. Our community is open and inclusive.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Is MMBA a religious organization? <span class="faq-chevron">⌄</span></button>
+      <div class="faq-a">MMBA is a cultural organization, not a religious one. While we celebrate festivals like Ganeshotsav that have religious origins, our focus is on cultural expression, community building, and heritage preservation. People of all faiths are welcome.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">How are MMBA events funded? <span class="faq-chevron">⌄</span></button>
+      <div class="faq-a">MMBA events are funded through membership fees, event ticket sales, and generous sponsorships from community businesses and patrons. As a 501(c)(3) non-profit, we operate transparently and donations may be tax-deductible.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Can I volunteer with MMBA? <span class="faq-chevron">⌄</span></button>
+      <div class="faq-a">Absolutely! MMBA runs entirely on the passion of volunteers. We welcome help with event organizing, stage management, food, décor, coordination, and more. Reach out through our Contact page to get involved.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Does MMBA have programs for children? <span class="faq-chevron">⌄</span></button>
+      <div class="faq-a">Yes. Children's cultural programs are a central focus for MMBA. We organize activities that help second-generation Maharashtrian children connect with their heritage through dance, music, stories, and festival participation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-mark">MM<span>BA</span></div>
+      <p>A non-profit organization serving the Maharashtrian community in Northern California. Promoting culture, connection, and heritage since 1980.</p>
+      <div class="est">Est. 1980 · Milpitas, CA · Non-Profit 501(c)(3)</div>
+    </div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="about.html">About MMBA</a></li><li><a href="membership.html">Membership</a></li><li><a href="community.html">Our Mission</a></li><li><a href="contact.html">Volunteer</a></li></ul></div>
+    <div class="footer-col"><h4>Events</h4><ul><li><a href="events.html">Ganeshotsav</a></li><li><a href="events.html">Diwali</a></li><li><a href="events.html">All Events</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="https://instagram.com/mmbayarea" target="_blank">Instagram</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Maharashtra Mandal Bay Area. All rights reserved.</span>
+    <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="https://mmbayarea.org" target="_blank">mmbayarea.org</a></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

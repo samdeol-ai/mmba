@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMBA – Maharashtra Mandal Bay Area</title>
+<meta name="description" content="Maharashtra Mandal Bay Area (MMBA) – A vibrant Maharashtrian community thriving in Silicon Valley since 1980. Cultural events, festivals, arts, and community.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/global.css">
+<style>
+/* ── HOME-SPECIFIC STYLES ── */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 72px 5% 0;
+  position: relative; overflow: hidden;
+}
+.hero-bg-motif {
+  position: absolute; right: -60px; top: 50%;
+  transform: translateY(-50%);
+  width: 640px; height: 640px;
+  opacity: 0.06; pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 100px; padding: 6px 16px;
+  font-size: 12px; font-weight: 500; color: var(--muted);
+  letter-spacing: 0.5px; text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero-badge .dot { width: 6px; height: 6px; background: var(--kesari); border-radius: 50%; }
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(44px, 6vw, 80px);
+  font-weight: 600; line-height: 1.04;
+  color: var(--text); margin-bottom: 24px;
+}
+.hero-title .accent { color: var(--maroon); }
+.hero-title .highlight { color: var(--kesari); }
+.hero-sub {
+  font-size: 17px; color: var(--muted);
+  max-width: 520px; margin-bottom: 40px; line-height: 1.75;
+}
+.hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+.hero-stats {
+  display: flex; gap: 48px;
+  margin-top: 64px; padding-top: 40px;
+  border-top: 1px solid var(--border);
+}
+.stat-item .number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px; font-weight: 700;
+  color: var(--maroon); line-height: 1;
+}
+.stat-item .label {
+  font-size: 12px; color: var(--muted);
+  margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+/* ── ABOUT ── */
+#about { background: var(--white); }
+.about-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 60px; align-items: center; }
+.about-card-main {
+  background: var(--maroon); border-radius: 20px; padding: 48px;
+  color: white; min-height: 400px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.about-card-main::before {
+  content: ''; position: absolute; top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: rgba(212,175,55,0.14); border-radius: 50%;
+}
+.about-card-main::after {
+  content: ''; position: absolute; bottom: -24px; left: -24px;
+  width: 120px; height: 120px;
+  background: rgba(255,106,19,0.12); border-radius: 50%;
+}
+.about-since { font-size: 12px; opacity: 0.65; letter-spacing: 1px; text-transform: uppercase; }
+.about-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px; line-height: 1.5;
+  position: relative; z-index: 1;
+}
+.about-quote::before {
+  content: '"'; font-size: 80px; color: var(--gold);
+  opacity: 0.35; line-height: 0;
+  vertical-align: -28px; margin-right: -6px;
+}
+.about-yr {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 88px; font-weight: 700;
+  color: var(--gold); opacity: 0.2;
+  position: absolute; bottom: 20px; right: 28px;
+  line-height: 1; z-index: 0;
+}
+.pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pillar-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; cursor: default;
+}
+.pillar-card:hover {
+  border-color: var(--kesari);
+  box-shadow: 0 4px 20px rgba(255,106,19,0.1);
+  transform: translateY(-3px);
+}
+.pillar-icon { font-size: 26px; margin-bottom: 10px; display: block; }
+.pillar-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 600;
+  color: var(--maroon); margin-bottom: 6px;
+}
+.pillar-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── EVENTS PREVIEW ── */
+#events-preview { background: var(--bg2); }
+.events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.event-card { background: var(--white); border-radius: 14px; overflow: hidden; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+.event-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.1); }
+.event-thumb {
+  height: 170px; display: flex; align-items: center; justify-content: center;
+  font-size: 56px; position: relative;
+}
+.event-thumb.c1 { background: linear-gradient(135deg,#FFF3E0,#FFE0B2); }
+.event-thumb.c2 { background: linear-gradient(135deg,#FFF8E1,#FFF3CD); }
+.event-thumb.c3 { background: linear-gradient(135deg,#E8F5E9,#C8E6C9); }
+.event-thumb.c4 { background: linear-gradient(135deg,#E3F2FD,#BBDEFB); }
+.event-thumb.c5 { background: linear-gradient(135deg,#FCE4EC,#F8BBD9); }
+.event-thumb.c6 { background: linear-gradient(135deg,#F3E5F5,#E1BEE7); }
+.event-tag {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--kesari); color: white;
+  font-size: 10px; font-weight: 600;
+  padding: 4px 10px; border-radius: 100px;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.event-body { padding: 20px; }
+.event-date { font-size: 11px; font-weight: 600; color: var(--blue); letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 8px; }
+.event-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+.event-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+.event-link { color: var(--blue); font-size: 13px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; transition: gap 0.2s; }
+.event-link:hover { gap: 8px; }
+
+/* ── COMMUNITY STRIP ── */
+#community-strip { background: var(--white); }
+.community-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center; }
+.gallery-mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px; gap: 12px; }
+.g-cell { border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 48px; position: relative; overflow: hidden; cursor: pointer; }
+.g-cell.tall { grid-row: span 2; font-size: 60px; }
+.g1 { background: linear-gradient(135deg,#FFEBCC,#FFD7A0); }
+.g2 { background: linear-gradient(135deg,#FDEBD0,#FADDB4); }
+.g3 { background: linear-gradient(135deg,#F0E6FF,#DCC4FF); }
+.g4 { background: linear-gradient(135deg,#E8F5E9,#B5EAB9); }
+.g-overlay {
+  position: absolute; inset: 0;
+  background: rgba(122,30,30,0.1);
+  display: flex; align-items: flex-end; padding: 14px;
+  opacity: 0; transition: opacity 0.2s;
+}
+.g-cell:hover .g-overlay { opacity: 1; }
+.g-overlay span { font-size: 12px; font-weight: 600; color: white; text-shadow: 0 1px 4px rgba(0,0,0,0.5); letter-spacing: 0.4px; }
+.mission-block {
+  background: var(--bg2); border-left: 4px solid var(--maroon);
+  border-radius: 0 12px 12px 0; padding: 24px; margin-bottom: 28px;
+}
+.mission-block p { font-size: 15px; color: var(--muted); line-height: 1.75; }
+.mission-block strong { color: var(--maroon); font-weight: 600; }
+.values-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.values-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: var(--muted); line-height: 1.5; }
+.v-icon { width: 28px; height: 28px; min-width: 28px; background: var(--bg2); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.values-list li strong { color: var(--text); font-weight: 500; }
+
+/* ── MEMBERSHIP SECTION ── */
+#membership-cta {
+  background: var(--maroon);
+  position: relative; overflow: hidden;
+}
+#membership-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.03'%3E%3Ccircle cx='40' cy='40' r='5'/%3E%3Cpath d='M40 5 L46 18 L40 14 L34 18Z'/%3E%3Cpath d='M40 75 L46 62 L40 66 L34 62Z'/%3E%3C/g%3E%3C/svg%3E");
+}
+#membership-cta .section-label { color: var(--gold); }
+#membership-cta .section-title { color: white; }
+#membership-cta .section-sub { color: rgba(255,255,255,0.65); }
+.mem-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 52px; }
+.mem-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 16px; padding: 36px 28px;
+  transition: background 0.2s, transform 0.2s;
+  position: relative; z-index: 1;
+}
+.mem-card:hover { background: rgba(255,255,255,0.11); transform: translateY(-4px); }
+.mem-card.featured { background: var(--kesari); border-color: var(--kesari); }
+.mem-card.featured:hover { background: #e55c0a; }
+.mem-badge-label { font-size: 10px; font-weight: 600; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; display: block; }
+.mem-card.featured .mem-badge-label { color: rgba(255,255,255,0.8); }
+.mem-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 600; color: white; margin-bottom: 8px; }
+.mem-price { font-size: 36px; font-weight: 600; color: white; line-height: 1; margin-bottom: 4px; }
+.mem-price span { font-size: 16px; font-weight: 400; opacity: 0.7; }
+.mem-period { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+.mem-feats { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.mem-feats li { font-size: 14px; color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 10px; }
+.mem-feats li::before { content: '✓'; color: var(--gold); font-weight: 700; }
+.mem-card.featured .mem-feats li::before { color: white; }
+.btn-mem {
+  width: 100%; padding: 13px; border-radius: 8px;
+  font-size: 14px; font-weight: 500; text-align: center;
+  text-decoration: none; display: block;
+  border: 1.5px solid rgba(255,255,255,0.3); color: white;
+  background: transparent; cursor: pointer; transition: background 0.2s;
+  font-family: inherit;
+}
+.btn-mem:hover { background: rgba(255,255,255,0.1); }
+.mem-card.featured .btn-mem { background: white; color: var(--kesari); border-color: white; }
+.mem-card.featured .btn-mem:hover { background: rgba(255,255,255,0.9); }
+
+@media (max-width: 900px) {
+  .events-grid { grid-template-columns: 1fr 1fr; }
+  .mem-grid { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
+}
+@media (max-width: 768px) {
+  .about-grid, .community-grid { grid-template-columns: 1fr; }
+  .events-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 28px; flex-wrap: wrap; }
+  .pillars { grid-template-columns: 1fr; }
+  .hero-bg-motif { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-emblem"><span>म</span></div>
+    <div class="logo-text">
+      <span class="name">MMBA</span>
+      <span class="tagline">Maharashtra Mandal Bay Area</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="community.html">Community</a></li>
+    <li><a href="membership.html">Membership</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="membership.html" class="btn-nav-join">Join Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="about.html">About</a>
+  <a href="events.html">Events</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="community.html">Community</a>
+  <a href="membership.html">Membership</a>
+  <a href="contact.html">Contact</a>
+  <a href="membership.html" class="btn-nav-join">Join Us</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="motif-bg">
+  <div class="accent-line"></div>
+  <svg class="hero-bg-motif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#7A1E1E" stroke-width="1">
+      <circle cx="200" cy="200" r="180"/><circle cx="200" cy="200" r="140"/>
+      <circle cx="200" cy="200" r="100"/><circle cx="200" cy="200" r="60"/>
+      <line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/>
+      <line x1="73" y1="73" x2="327" y2="327"/><line x1="327" y1="73" x2="73" y2="327"/>
+      <polygon points="200,40 360,300 40,300"/><polygon points="200,360 360,100 40,100"/>
+    </g>
+  </svg>
+  <div class="hero-content anim-hero">
+    <div class="hero-badge"><span class="dot"></span>Serving Bay Area Since 1980</div>
+    <h1 class="hero-title">
+      Maharashtra's<br>
+      <span class="accent">Heart</span> in<br>
+      <span class="highlight">Silicon Valley</span>
+    </h1>
+    <p class="hero-sub">A vibrant community of Maharashtrians thriving in the Bay Area — celebrating our culture, connecting generations, and building lasting bonds.</p>
+    <div class="hero-ctas">
+      <a href="events.html" class="btn-primary">Upcoming Events →</a>
+      <a href="membership.html" class="btn-secondary">Become a Member</a>
+    </div>
+    <div class="hero-stats anim-hero-delay">
+      <div class="stat-item"><div class="number">44+</div><div class="label">Years Strong</div></div>
+      <div class="stat-item"><div class="number">1K+</div><div class="label">Families</div></div>
+      <div class="stat-item"><div class="number">10+</div><div class="label">Annual Festivals</div></div>
+      <div class="stat-item"><div class="number">4</div><div class="label">Pillars of Culture</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT PREVIEW -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-card-main fade-in">
+      <div class="about-since">Est. 1980 · Northern California</div>
+      <div class="about-quote">Promoting cultural ties among people interested in Maharashtrian culture from around the world.</div>
+      <div class="about-yr">1980</div>
+    </div>
+    <div>
+      <div class="section-head fade-in">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">Culture, Community<br>& Celebration</h2>
+        <p class="section-sub">MMBA brings together Maharashtrians across the Bay Area through four pillars of cultural life.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar-card fade-in"><span class="pillar-icon">🎭</span><div class="pillar-title">Cultural Events</div><p class="pillar-desc">Annual festivals — Ganeshotsav, Diwali, Makar Sankrant, Kojagiri, and more.</p></div>
+        <div class="pillar-card fade-in"><span class="pillar-icon">🎶</span><div class="pillar-title">Arts & Music</div><p class="pillar-desc">A stage for local talents in music, dance, theater, and performing arts.</p></div>
+        <div class="pillar-card fade-in"><span class="pillar-icon">🤝</span><div class="pillar-title">Social Impact</div><p class="pillar-desc">Community service programs in partnership with organizations in India.</p></div>
+        <div class="pillar-card fade-in"><span class="pillar-icon">🎪</span><div class="pillar-title">Theater</div><p class="pillar-desc">Keeping Maharashtra's 100-year theatrical tradition alive in the Bay Area.</p></div>
+      </div>
+      <div style="margin-top:32px" class="fade-in"><a href="about.html" class="btn-secondary">Learn More About Us</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS PREVIEW -->
+<section id="events-preview">
+  <div class="section-head fade-in">
+    <span class="section-label">Calendar</span>
+    <h2 class="section-title">Festivals & Events</h2>
+    <p class="section-sub">Join us year-round for celebrations that renew cultural bonds and bring joy to families across generations.</p>
+  </div>
+  <div class="events-grid">
+    <div class="event-card fade-in" data-category="cultural">
+      <div class="event-thumb c1">🪔<span class="event-tag">Signature</span></div>
+      <div class="event-body">
+        <div class="event-date">August – September</div>
+        <div class="event-name">Ganeshotsav</div>
+        <p class="event-desc">10 days of Ganpati festivities with aarti, cultural programs, and community feasts.</p>
+        <a href="events.html" class="event-link">Learn more →</a>
+      </div>
+    </div>
+    <div class="event-card fade-in" data-category="cultural">
+      <div class="event-thumb c2">✨</div>
+      <div class="event-body">
+        <div class="event-date">October – November</div>
+        <div class="event-name">Diwali Celebration</div>
+        <p class="event-desc">Illuminate the Bay Area with lights, rangoli, sweets, and community spirit.</p>
+        <a href="events.html" class="event-link">Learn more →</a>
+      </div>
+    </div>
+    <div class="event-card fade-in" data-category="cultural">
+      <div class="event-thumb c3">🪁</div>
+      <div class="event-body">
+        <div class="event-date">January</div>
+        <div class="event-name">Makar Sankrant</div>
+        <p class="event-desc">Kite flying, tilgul exchange, and traditional Maharashtrian halwa to welcome the harvest season.</p>
+        <a href="events.html" class="event-link">Learn more →</a>
+      </div>
+    </div>
+    <div class="event-card fade-in" data-category="cultural">
+      <div class="event-thumb c4">🚶</div>
+      <div class="event-body">
+        <div class="event-date">June – July</div>
+        <div class="event-name">Wari Procession</div>
+        <p class="event-desc">A sacred community walk in devotion of Sant Dnyaneshwar and Sant Tukaram.</p>
+        <a href="events.html" class="event-link">Learn more →</a>
+      </div>
+    </div>
+    <div class="event-card fade-in" data-category="arts">
+      <div class="event-thumb c5">🎭</div>
+      <div class="event-body">
+        <div class="event-date">Annual</div>
+        <div class="event-name">Marathi Natak</div>
+        <p class="event-desc">An original Marathi play performed by local artists, preserving Maharashtra's theatrical legacy.</p>
+        <a href="events.html" class="event-link">Learn more →</a>
+      </div>
+    </div>
+    <div class="event-card fade-in" data-category="cultural">
+      <div class="event-thumb c6">🎵</div>
+      <div class="event-body">
+        <div class="event-date">Year-round</div>
+        <div class="event-name">Mangalagaur & Kojagiri</div>
+        <p class="event-desc">Women's cultural celebrations with traditional songs, games, and festive togetherness.</p>
+        <a href="events.html" class="event-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:44px" class="fade-in">
+    <a href="events.html" class="btn-primary">View Full Event Calendar →</a>
+  </div>
+</section>
+
+<!-- GOLD BANNER -->
+<div class="gold-banner">
+  <p>🎶 Visiting artists from India perform at MMBA — stay tuned for upcoming shows</p>
+  <a href="contact.html">Get Notified</a>
+</div>
+
+<!-- COMMUNITY STRIP -->
+<section id="community-strip">
+  <div class="community-grid">
+    <div class="gallery-mosaic fade-in">
+      <div class="g-cell tall g1" data-lightbox data-caption="Cultural Performances"><span class="g-emoji">🎨</span><div class="g-overlay"><span>Cultural Performances</span></div></div>
+      <div class="g-cell g2" data-lightbox data-caption="Diwali Celebrations"><span class="g-emoji">🪔</span><div class="g-overlay"><span>Diwali Celebrations</span></div></div>
+      <div class="g-cell g3" data-lightbox data-caption="Dance & Arts"><span class="g-emoji">💃</span><div class="g-overlay"><span>Dance & Arts</span></div></div>
+      <div class="g-cell g4" data-lightbox data-caption="Community Bonds"><span class="g-emoji">🤝</span><div class="g-overlay"><span>Community Bonds</span></div></div>
+    </div>
+    <div class="fade-in">
+      <div class="section-head">
+        <span class="section-label">Our Community</span>
+        <h2 class="section-title">Rooted in Tradition,<br>Thriving in the Bay</h2>
+      </div>
+      <div class="mission-block">
+        <p><strong>Maharashtra Mandal Bay Area (MMBA)</strong> is a non-profit organization serving Northern California since 1980. Our mission is to <strong>promote cultural ties</strong> among people interested in Maharashtrian culture from various parts of the world.</p>
+      </div>
+      <ul class="values-list">
+        <li><span class="v-icon">🌿</span><span><strong>Preserve Heritage</strong> — Keep Marathi language, customs, and traditions alive for the next generation.</span></li>
+        <li><span class="v-icon">🌉</span><span><strong>Bridge Generations</strong> — Connect Bay Area-born children with their Maharashtrian roots.</span></li>
+        <li><span class="v-icon">🌍</span><span><strong>Give Back</strong> — Partner with social organizations running programs in India.</span></li>
+        <li><span class="v-icon">🎤</span><span><strong>Platform for Talent</strong> — Showcase local artists in music, dance, acting, and theater.</span></li>
+      </ul>
+      <div style="margin-top:32px"><a href="community.html" class="btn-secondary">Meet the Community</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP CTA -->
+<section id="membership-cta">
+  <div class="section-head fade-in" style="position:relative;z-index:1">
+    <span class="section-label">Join the Mandal</span>
+    <h2 class="section-title">Membership Plans</h2>
+    <p class="section-sub">Be part of a thriving community. Your membership sustains cultural programs, festivals, and community welfare initiatives.</p>
+  </div>
+  <div class="mem-grid">
+    <div class="mem-card fade-in">
+      <span class="mem-badge-label">Individual</span>
+      <div class="mem-name">Sadasya</div>
+      <div class="mem-price">$40 <span>/ year</span></div>
+      <div class="mem-period">Annual Membership</div>
+      <ul class="mem-feats">
+        <li>Event invitations & discounts</li>
+        <li>Marathi newsletter</li>
+        <li>Community directory access</li>
+        <li>Voting rights at AGM</li>
+      </ul>
+      <a href="membership.html" class="btn-mem">Get Started</a>
+    </div>
+    <div class="mem-card featured fade-in">
+      <span class="mem-badge-label">Most Popular</span>
+      <div class="mem-name">Kutumb</div>
+      <div class="mem-price">$75 <span>/ year</span></div>
+      <div class="mem-period">Family Membership</div>
+      <ul class="mem-feats">
+        <li>All Sadasya benefits</li>
+        <li>Full family included</li>
+        <li>Priority event seating</li>
+        <li>Children's cultural programs</li>
+        <li>Discounted performing arts tickets</li>
+      </ul>
+      <a href="membership.html" class="btn-mem">Join as Family</a>
+    </div>
+    <div class="mem-card fade-in">
+      <span class="mem-badge-label">Patron</span>
+      <div class="mem-name">Pratishtha</div>
+      <div class="mem-price">$200 <span>/ year</span></div>
+      <div class="mem-period">Patron Membership</div>
+      <ul class="mem-feats">
+        <li>All Kutumb benefits</li>
+        <li>Patron recognition at events</li>
+        <li>Exclusive patron gatherings</li>
+        <li>Complimentary event tickets</li>
+      </ul>
+      <a href="membership.html" class="btn-mem">Become a Patron</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-mark">MM<span>BA</span></div>
+      <p>A non-profit organization serving the Maharashtrian community in Northern California. Promoting culture, connection, and heritage since 1980.</p>
+      <div class="est">Est. 1980 · Milpitas, CA · Non-Profit 501(c)(3)</div>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <ul>
+        <li><a href="about.html">About MMBA</a></li>
+        <li><a href="membership.html">Membership</a></li>
+        <li><a href="community.html">Our Mission</a></li>
+        <li><a href="contact.html">Volunteer</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Events</h4>
+      <ul>
+        <li><a href="events.html">Ganeshotsav</a></li>
+        <li><a href="events.html">Diwali</a></li>
+        <li><a href="events.html">Makar Sankrant</a></li>
+        <li><a href="events.html">All Events</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="https://instagram.com/mmbayarea" target="_blank">Instagram</a></li>
+        <li><a href="gallery.html">Photo Gallery</a></li>
+        <li><a href="contact.html">Sponsor an Event</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Maharashtra Mandal Bay Area. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="https://mmbayarea.org" target="_blank">mmbayarea.org</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

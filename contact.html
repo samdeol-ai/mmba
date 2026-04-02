@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact – MMBA Maharashtra Mandal Bay Area</title>
+<meta name="description" content="Contact Maharashtra Mandal Bay Area (MMBA) for event info, membership, volunteering, or sponsorship opportunities.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/global.css">
+<style>
+/* ── CONTACT LAYOUT ── */
+.contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+
+/* ── FORM ── */
+.contact-form-box { background: var(--white); border: 1px solid var(--border); border-radius: 20px; padding: 44px; }
+.contact-form-box h3 { font-family: 'Cormorant Garamond',serif; font-size: 28px; font-weight: 600; color: var(--maroon); margin-bottom: 6px; }
+.contact-form-box > p { font-size: 14px; color: var(--muted); margin-bottom: 28px; }
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-full { grid-column: span 2; }
+.form-stack { display: flex; flex-direction: column; gap: 16px; }
+
+/* ── CONTACT INFO ── */
+.info-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 16px; padding: 28px; display: flex; gap: 16px; align-items: flex-start;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.info-card:hover { border-color: var(--kesari); box-shadow: 0 4px 20px rgba(255,106,19,0.08); }
+.info-icon {
+  width: 48px; height: 48px; min-width: 48px;
+  border-radius: 12px; background: var(--bg2);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.info-label { font-size: 11px; font-weight: 600; color: var(--kesari); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+.info-val { font-size: 15px; color: var(--text); font-weight: 500; line-height: 1.5; }
+.info-val a { color: var(--blue); text-decoration: none; }
+.info-val a:hover { text-decoration: underline; }
+
+/* ── MAP PLACEHOLDER ── */
+.map-box {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 16px; padding: 48px; text-align: center;
+  margin-top: 8px;
+}
+.map-box .map-emoji { font-size: 48px; margin-bottom: 12px; display: block; }
+.map-box p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+.map-box a { color: var(--blue); font-weight: 500; text-decoration: none; }
+.map-box a:hover { text-decoration: underline; }
+
+/* ── SOCIAL LINKS ── */
+.social-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.s-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 11px 18px; border-radius: 10px;
+  border: 1.5px solid var(--border); background: var(--white);
+  font-size: 13px; font-weight: 500; color: var(--text);
+  text-decoration: none; transition: all 0.2s;
+}
+.s-btn:hover { border-color: var(--blue); background: var(--bg2); color: var(--blue); }
+
+/* ── SPONSOR SECTION ── */
+.sponsor-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.sponsor-type {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 14px; padding: 28px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.sponsor-type:hover { border-color: var(--gold); transform: translateY(-3px); }
+.sponsor-tier { font-size: 11px; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.sponsor-name { font-family: 'Cormorant Garamond',serif; font-size: 22px; font-weight: 600; color: var(--maroon); margin-bottom: 12px; }
+.sponsor-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+@media (max-width: 900px) { .sponsor-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) {
+  .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+  .form-row-2 { grid-template-columns: 1fr; }
+  .form-full { grid-column: span 1; }
+  .sponsor-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="logo-emblem"><span>म</span></div>
+    <div class="logo-text"><span class="name">MMBA</span><span class="tagline">Maharashtra Mandal Bay Area</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li><li><a href="events.html">Events</a></li>
+    <li><a href="gallery.html">Gallery</a></li><li><a href="community.html">Community</a></li>
+    <li><a href="membership.html">Membership</a></li><li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="membership.html" class="btn-nav-join">Join Us</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<nav class="mobile-menu" id="mobile-menu">
+  <a href="about.html">About</a><a href="events.html">Events</a><a href="gallery.html">Gallery</a>
+  <a href="community.html">Community</a><a href="membership.html">Membership</a>
+  <a href="contact.html">Contact</a><a href="membership.html" class="btn-nav-join">Join Us</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero motif-bg">
+  <div class="accent-line"></div>
+  <svg class="page-hero-motif" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#7A1E1E" stroke-width="0.8"><circle cx="200" cy="200" r="180"/><circle cx="200" cy="200" r="130"/><circle cx="200" cy="200" r="80"/></g>
+  </svg>
+  <div class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span>Contact</span></div>
+  <div class="page-hero-badge"><span class="dot"></span>We'd Love to Hear From You</div>
+  <h1>नमस्कार —<br><span class="accent">Get in Touch</span></h1>
+  <p class="lead">Questions about events, membership, volunteering, or performing? Our team is here to help. Reach out in English or Marathi — either works!</p>
+</div>
+
+<!-- CONTACT SECTION -->
+<section style="background:var(--white)">
+  <div class="contact-wrap">
+    <!-- FORM -->
+    <div class="contact-form-box fade-in">
+      <h3>Send Us a Message</h3>
+      <p>We typically respond within 1–2 business days.</p>
+      <form id="contact-form" class="form-stack">
+        <div class="form-row-2">
+          <div class="form-group"><label>First Name *</label><input type="text" placeholder="Rahul" required></div>
+          <div class="form-group"><label>Last Name *</label><input type="text" placeholder="Joshi" required></div>
+        </div>
+        <div class="form-group"><label>Email Address *</label><input type="email" placeholder="rahul@email.com" required></div>
+        <div class="form-group"><label>Phone (optional)</label><input type="tel" placeholder="+1 (408) 000-0000"></div>
+        <div class="form-group">
+          <label>I'm contacting about</label>
+          <select>
+            <option value="">Select a topic...</option>
+            <option>Membership</option>
+            <option>Upcoming Events</option>
+            <option>Volunteering</option>
+            <option>Performing / Auditions</option>
+            <option>Sponsorship</option>
+            <option>Photo Submission</option>
+            <option>Media Inquiry</option>
+            <option>General Question</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Message *</label><textarea placeholder="Tell us how we can help — or just say नमस्कार! We're happy to hear from you." required style="min-height:130px"></textarea></div>
+        <button type="submit" class="btn-primary" style="align-self:flex-start;padding:14px 36px">Send Message →</button>
+      </form>
+    </div>
+
+    <!-- INFO -->
+    <div style="display:flex;flex-direction:column;gap:16px" class="fade-in">
+      <div class="info-card">
+        <div class="info-icon">📍</div>
+        <div>
+          <div class="info-label">Mailing Address</div>
+          <div class="info-val">1765 Landess Ave #108<br>Milpitas, California 95035<br>United States</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">🌐</div>
+        <div>
+          <div class="info-label">Website</div>
+          <div class="info-val"><a href="https://mmbayarea.org" target="_blank">mmbayarea.org</a></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">📸</div>
+        <div>
+          <div class="info-label">Instagram</div>
+          <div class="info-val"><a href="https://instagram.com/mmbayarea" target="_blank">@mmbayarea</a><br><span style="font-size:13px;color:var(--muted)">4,200+ followers · Most active channel</span></div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">👥</div>
+        <div>
+          <div class="info-label">Social Media</div>
+          <div class="info-val">
+            <div class="social-row" style="margin-top:8px">
+              <a href="https://instagram.com/mmbayarea" target="_blank" class="s-btn">📸 Instagram</a>
+              <a href="https://facebook.com" target="_blank" class="s-btn">👥 Facebook</a>
+              <a href="https://youtube.com" target="_blank" class="s-btn">▶ YouTube</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-box">
+        <span class="map-emoji">📍</span>
+        <p><strong style="color:var(--maroon)">Milpitas, California</strong><br>At the heart of Silicon Valley.<br><br>
+        <a href="https://maps.google.com/?q=1765+Landess+Ave+%23108+Milpitas+CA" target="_blank">Open in Google Maps →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPONSORSHIP -->
+<section style="background:var(--bg2)">
+  <div class="section-head fade-in">
+    <span class="section-label">Support MMBA</span>
+    <h2 class="section-title">Sponsor an Event</h2>
+    <p class="section-sub">Partner with MMBA and connect your brand with thousands of Maharashtrian families across the Bay Area. Our audience is educated, engaged, and community-oriented.</p>
+  </div>
+  <div class="sponsor-grid">
+    <div class="sponsor-type fade-in">
+      <div class="sponsor-tier">Bronze</div>
+      <div class="sponsor-name">Community Supporter</div>
+      <p class="sponsor-desc">Logo placement in event materials, recognition in newsletter, appreciation at event. Ideal for local businesses and community organizations.</p>
+    </div>
+    <div class="sponsor-type fade-in" style="border-color:var(--gold)">
+      <div class="sponsor-tier">Gold</div>
+      <div class="sponsor-name">Cultural Partner</div>
+      <p class="sponsor-desc">Premium logo placement, stage mention, social media features, banner at event, and dedicated article in MMBA newsletter. Great visibility with our community.</p>
+    </div>
+    <div class="sponsor-type fade-in">
+      <div class="sponsor-tier">Platinum</div>
+      <div class="sponsor-name">Title Sponsor</div>
+      <p class="sponsor-desc">Event naming rights, prominent stage and digital presence, executive engagement opportunity, and year-round partnership across all MMBA channels.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:36px" class="fade-in">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:20px">Interested in sponsoring? Contact us to discuss custom packages for your organization.</p>
+    <a href="#" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary">Inquire About Sponsorship →</a>
+  </div>
+</section>
+
+<!-- VOLUNTEER CTA -->
+<section style="background:var(--maroon);position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='2' fill='%23FFFFFF' fill-opacity='0.04'/%3E%3C/svg%3E\")"></div>
+  <div style="position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center" class="fade-in">
+    <div>
+      <span class="section-label" style="color:var(--gold)">Get Involved</span>
+      <h2 class="section-title" style="color:white">Volunteer With MMBA</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.65)">MMBA runs on community passion. If you'd like to help organize events, manage the stage, handle photography, or support outreach — we'd love to have you.</p>
+    </div>
+    <div style="flex-shrink:0">
+      <a href="#" onclick="document.querySelector('[value=Volunteering]').selected=true;document.getElementById('contact-form').scrollIntoView({behavior:'smooth'});return false;" class="btn-primary" style="white-space:nowrap;background:white;color:var(--maroon)">Volunteer Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><div class="logo-mark">MM<span>BA</span></div><p>A non-profit serving the Maharashtrian community in Northern California since 1980.</p><div class="est">Est. 1980 · Milpitas, CA · Non-Profit 501(c)(3)</div></div>
+    <div class="footer-col"><h4>Community</h4><ul><li><a href="about.html">About MMBA</a></li><li><a href="membership.html">Membership</a></li><li><a href="community.html">Our Mission</a></li><li><a href="contact.html">Volunteer</a></li></ul></div>
+    <div class="footer-col"><h4>Events</h4><ul><li><a href="events.html">Ganeshotsav</a></li><li><a href="events.html">Diwali</a></li><li><a href="events.html">All Events</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="contact.html">Contact Us</a></li><li><a href="https://instagram.com/mmbayarea" target="_blank">Instagram</a></li><li><a href="gallery.html">Gallery</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2025 Maharashtra Mandal Bay Area. All rights reserved.</span><div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="https://mmbayarea.org" target="_blank">mmbayarea.org</a></div></div>
+</footer>
+<script src="js/main.js"></script>
+</body>
+</html>
