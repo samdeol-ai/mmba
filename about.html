@@ -102,6 +102,61 @@
 }
 .faq-item.open .faq-a { display: block; }
 
+/* ── JOIN MANDAL CTA ── */
+.join-mandal {
+  background: linear-gradient(135deg, var(--maroon), #5c1414);
+  color: var(--white);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 5%;
+}
+.join-mandal::before {
+  content: ''; position: absolute; top: -50px; right: -50px;
+  width: 200px; height: 200px;
+  background: rgba(255,106,19,0.12); border-radius: 50%;
+}
+.join-mandal::after {
+  content: ''; position: absolute; bottom: -30px; left: 5%;
+  width: 140px; height: 140px;
+  background: rgba(212,175,55,0.08); border-radius: 50%;
+}
+.join-mandal-content {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.join-mandal-content .section-title {
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.join-mandal-content p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto 36px;
+}
+.join-mandal-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.join-mandal-ctas .btn-primary {
+  box-shadow: 0 4px 16px rgba(255,106,19,0.4);
+}
+.join-mandal-ctas .btn-secondary {
+  border-color: rgba(255,255,255,0.4);
+  color: var(--white);
+}
+.join-mandal-ctas .btn-secondary:hover {
+  background: var(--white);
+  color: var(--maroon);
+}
+
+
 @media (max-width: 900px) {
   .leaders-grid { grid-template-columns: repeat(2,1fr); }
   .values-list-h { grid-template-columns: repeat(2,1fr); }
@@ -314,6 +369,19 @@
   </div>
   <div style="text-align:center;margin-top:36px;font-size:14px;color:var(--muted)">
     <em>Leadership roster updated annually. Contact us for current committee information.</em>
+  </div>
+</section>
+
+<!-- BECOME A MEMBER CTA -->
+<section class="join-mandal fade-in">
+  <div class="join-mandal-content">
+    <span class="section-label" style="color: var(--gold);">Support Our Culture</span>
+    <h2 class="section-title">Become a Part of MMBA Today</h2>
+    <p>Join a community of 1,000+ families celebrating and preserving Maharashtrian heritage in Northern California. Your membership sustains our annual festivals, youth programs, and social impact initiatives.</p>
+    <div class="join-mandal-ctas">
+      <a href="membership.html" class="btn-primary">View Membership Plans →</a>
+      <a href="contact.html" class="btn-secondary">Contact Us</a>
+    </div>
   </div>
 </section>
 
