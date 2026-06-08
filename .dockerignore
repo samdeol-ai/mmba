@@ -2,7 +2,6 @@
 .github
 .claude
 Dockerfile
-nginx.conf
 .dockerignore
 credentials.json
 *.json
